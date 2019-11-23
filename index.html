@@ -11,12 +11,14 @@
 
 <body>
   <div class="container">
+
     <div class="row">
-      <div class="col-xs-12 col-md-12">
-        <h1>#History</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <div class="col-xs-12 col-md-12">
+          <h1>#History</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
       </div>
-    </div>
+      
     <div class="row">
       <div class="col-xs-12  col-md-4">
         <div class="article">
@@ -27,45 +29,112 @@
             </div>
             <button id="button" type="button" class="btn btn-default">Search</button>
           </form>
+
+          <p><br></p>
+
         </div>
       </div>
     </div>
 
-    <section id="scrolly">
+   <main>
+    <section id="intro">
+        <p> <br> This is the start of section 1. Here we show a heatmap comparing twitter popularity of two politicians as layers on a leaflet map<br></p>
+		</section>
+
+    <section id="scrolly1">
 
 			<article>
 				<div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
-					<p>STEP 1</p>
+            <!-- <p class="stepText">STEP 1</p> -->
 				</div>
 				<div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-					<p>STEP 2</p>
+					<p class="stepText">STEP 2</p>
 				</div>
 				<div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
-					<p>STEP 3</p>
+					<p class="stepText">STEP 3</p>
 				</div>
 				<div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
-					<p>STEP 4</p>
+					<p class="stepText">STEP 4</p>
 				</div>
 			</article>
 
 			<figure style="height: 523.5px; top: 261.75px;">
 				<p>1</p>
 			</figure>
-		</section>
+    </section>
 
-    <div class="row">
-      <div class="col-xs-12  col-md-12">
-        <h2>Time</h2>
-        <div class="row align-items-center">
-          <div class="col-md-12"><div id="slider-time"></div></div>
+    <section id="outro1">
+      <p> <br> This is the end of section 1 <br></p>
+    </section>
+
+    <section id="intro2">
+        <p> <br> This is the start of section 2. Here we show a multi-trace line plot tracking how active the two politcians have been on twitter. <br></p>
+      </section>
+
+    <section id="scrolly2">
+
+      <article>
+        <div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
+          <!-- <p class="stepText">STEP 1</p> -->
         </div>
-      </div>
-    </div>
+        <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
+          <p class="stepText">STEP 2</p>
+        </div>
+        <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
+          <p class="stepText">STEP 3</p>
+        </div>
+        <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
+          <p class="stepText">STEP 4</p>
+        </div>
+      </article>
+  
+      <figure style="height: 523.5px; top: 261.75px;">
+        <p>1</p>
+      </figure>
+    </section>
+  
+    <section id="outro2">
+      <p> <br> This is the end of section 2 <br></p>
+    </section>
+
+    <section id="intro3">
+        <p> <br> This is the start of section 3. Here we show the most common 5 words in the politician's tweets, as well as their most popular tweets ever.<br></p>
+      </section>
+  
+    <section id="scrolly3">
+
+      <article>
+        <div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
+          <!-- <p class="stepText">STEP 1</p> -->
+        </div>
+        <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
+          <p class="stepText">STEP 2</p>
+        </div>
+        <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
+          <p class="stepText">STEP 3</p>
+        </div>
+        <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
+          <p class="stepText">STEP 4</p>
+        </div>
+        <div class="step" data-step="5" data-scrollama-index="4" style="height: 785px;">
+            <p class="stepText">STEP 4</p>
+          </div>
+      </article>
+
+      <figure style="height: 523.5px; top: 261.75px;">
+        <p>1</p>
+      </figure>
+    </section>
+      
+    <section id="outro3">
+      <p> <br> This is the end of section 3 <br></p>
+    </section>
+
+    </main> 
 
   </div>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://unpkg.com/d3-simple-slider"></script>
   <script src="assets/js/stickyfill.min.js"></script>
   <script src="https://unpkg.com/scrollama"></script>
   <script type="text/javascript" src="assets/js/app.js"></script>

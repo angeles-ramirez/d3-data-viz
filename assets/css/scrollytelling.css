@@ -1,13 +1,43 @@
-#scrolly {
+#scrolly1 {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #f3f3f3;
+  background-color: white;
   padding: 1rem;
 }
 
-#scrolly>* {
+#scrolly1>* {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+#scrolly2 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  padding: 1rem;
+}
+
+#scrolly2>* {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+#scrolly3 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  padding: 1rem;
+}
+
+#scrolly3>* {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -48,9 +78,11 @@ figure p {
 
 
 .step {
+  transition-duration: 0.25s;
+  transition-timing-function: linear;
   margin: 0 auto 2rem auto;
-  background-color: #3b3b3b;
-  color: #fff;
+  background-color:white;
+  color: black;
 }
 
 .step:last-child {
@@ -58,12 +90,12 @@ figure p {
 }
 
 .step.is-active {
-  background-color: goldenrod;
-  color: #3b3b3b;
+  color: black;
 }
 
 .step p {
   text-align: center;
   padding: 1rem;
   font-size: 1.5rem;
+  background-color: #f3f3f3;
 }
