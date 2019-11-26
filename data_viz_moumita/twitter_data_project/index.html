@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Placeholder Title</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+  <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+    
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/scrollytelling.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- Bootstrap Slider -->
+<!--script src="./Libraries/bootstrap-slider-master/bootstrap-slider.js"></script>
+<link href="./Libraries/bootstrap-slider-master/dist/css/bootstrap-slider.min.css" rel="stylesheet"-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h1>#History</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12  col-md-4">
+        <div class="article">
+          <form>
+            
+            <div class="form-group">
+             
+              <select class="selectpicker" id="keyInputs" multiple data-max-options="2">
+                <option>Bernie Sanders</option>
+                <option>Donald Trump</option>
+                <option>Joe Biden</option>
+                <option>Elizabeth Warren</option>
+                <option>Pete Buttigieg</option>
+                <option>Kamala Harris</option>
+                <option>Andrew Yang</option>
+                <option>Ted Cruz</option>
+                <option>Ben Carson</option>
+                <option>Mike Pence</option>
+              </select>
+            </div>
+            <button id="button" type="button" class="btn btn-default">Search</button>
+            <!--button id="refreashbutton" type="button" class="btn btn-default">Refreash</button-->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <section id="plots-chart">
+
+			<!--article>
+				<div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
+					<p>STEP 1</p>
+				</div>
+				<div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
+					<p>STEP 2</p>
+				</div>
+				<div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
+					<p>STEP 3</p>
+				</div>
+				<div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
+					<p>STEP 4</p>
+				</div>
+      </article-->
+      <div class="container">
+      <div id="map">
+         
+      </div>
+         
+
+      <!-- API key -->
+      <script type="text/javascript" src="assets/js/config.js"></script>
+  
+      <!-- JS -->
+      <!--script type="text/javascript" src="static/js/just-crime.js"></-->
+      <script type="text/javascript" src="assets/js/heatmap1.js"></script>
+       <!-- Leaflet heatmap plugin-->
+      
+    <script type="text/javascript" src="assets/js/leaflet-heat.js"></script>
+
+      
+    
+      
+      <div class="row">
+      
+     
+          <h2>Chart</h2>
+          <div id="plot">   </div>
+          </div>
+        <!--script type="text/javascript" src="assets/js/plot.js"></script-->
+          
+        </section>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://unpkg.com/d3-simple-slider"></script>
+  <script src="assets/js/stickyfill.min.js"></script>
+  <script src="https://unpkg.com/scrollama"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
+
+</body>
+
+</html>
