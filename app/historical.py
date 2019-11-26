@@ -1,0 +1,1 @@
+# historical.py makes API calls to twitter and gathers the last ~3000 tweets for a given twitter user and adds them to a Mongo Database

@@ -99,3 +99,7 @@ figure p {
   font-size: 1.5rem;
   background-color: #f3f3f3;
 }
+
+
+/* set map, body, and html to 100% of the screen size */
+#map { height: 650px; }

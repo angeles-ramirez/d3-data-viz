@@ -21,8 +21,8 @@ var lightTweeter = politician1;
 var tweetDifferential = 33;
 var p1TweetVocab = ["middle", "class", "fair", "America", "Americans"];
 var p2TweetVocab = ["great", 'wonderful', 'best', 'greatest', 'thanks'];
-var p1TopTweet = "Bangladeshi tenants in Queens are joining together to take on the greed and abuse of landlords. I stand with them. Landlords should not be allowed to raise rents to whatever they want, whenever they want. It is time for national rent control."
-var p2TopTweet = 'Daniel Cameron, who just won the A.G. race in the Great Commonwealth of Kentucky, is a young and very talented political star. You will be hearing much from Cameron in the years to come!'
+var p1TopTweetDate = "10-12-2019";
+var p2TopTweetDate = "08-12-2019";
 
 var s11Text = `${politician1} is furthest ahead of ${politician2} in: ${p1State}`;
 var s12Text = `${politician2} is furthest ahead of ${politician1} in: ${p2State}`;
@@ -34,8 +34,8 @@ var s23Text = `${heavyTweeter} has tweeted ${tweetDifferential}% more that ${lig
 
 var s31Text = `The five most common words in ${politician1}'s tweets are: ${p1TweetVocab[0]}, ${p1TweetVocab[1]}, ${p1TweetVocab[2]}, ${p1TweetVocab[3]}, ${p1TweetVocab[4]}`;
 var s32Text = `The five most common words in ${politician2}'s tweets are: ${p2TweetVocab[0]}, ${p2TweetVocab[1]}, ${p2TweetVocab[2]}, ${p2TweetVocab[3]}, ${p2TweetVocab[4]}`;
-var s33Text = `${politician1}'s most popular tweet said this: ${p1TopTweet}`;
-var s34Text = `${politician2}'s most popular tweet said this: ${p2TopTweet}`;
+var s33Text = `${politician1}'s most popular tweet, which occured on ${p1TopTweetDate}, said this: `;
+var s34Text = `${politician2}'s most popular tweet, which occured on ${p2TopTweetDate},  said this: `;
 
 var arr = [s11Text, s12Text, s13Text,
           s21Text, s22Text, s23Text,
