@@ -22,6 +22,7 @@
   
   <!-- Plotly -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
 
   <!-- D3 -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -31,8 +32,14 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
   
   <!-- App specific sytlesheet -->
   <link rel="stylesheet" href="{{url_for('static', filename='css/scrollytelling.css')}}">
@@ -56,7 +63,7 @@
             
             <div class="form-group">
               
-              <select class="selectpicker" id="keyInputs" multiple data-max-options="2">
+              <!-- <select class="selectpicker" id="keyInputs" multiple data-max-options="2">
                 <option>ROBBERY</option>
                 <option>ASSAULT</option>
                 <option>WARRANTS</option>
@@ -67,6 +74,18 @@
                 <option>NON-CRIMINAL</option>
                 <option>OTHER OFFENSES</option>
                 <option>SUSPICIOUS OCC</option>
+              </select> -->
+              <select class="selectpicker" id="keyInputs" multiple data-max-options="2">
+                <option>Bernie Sanders</option>
+                <option>Donald Trump</option>
+                <option>Joe Biden</option>
+                <option>Elizabeth Warren</option>
+                <option>Pete Buttigieg</option>
+                <option>Kamala Harris</option>
+                <option>Andrew Yang</option>
+                <option>Ted Cruz</option>
+                <option>Ben Carson</option>
+                <option>Mike Pence</option>
               </select>
             </div>
             <button id="button" type="button" class="btn btn-default">Search</button>
@@ -101,7 +120,8 @@
 			<figure style="height: 523.5px; top: 261.75px;">
         <p>1</p>
         <div id="map"></div>
-			</figure>
+      </figure>
+      
     </section>
 
     <section id="outro1">
