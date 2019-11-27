@@ -54,27 +54,7 @@ d3.select("#keyInputs").remove()
 
 };
 
-// function filterdata(hashtag1,hashtag2) {
 
-// var hashdata =[]
-// var url1 = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
-// console.log(url1);
-
-// d3.json(url1).then(function(response) {
-//   console.log(response);
-   
-//   var hashdata1 =  response.filter(function(record) {
-//         return record.category == hashtag1;
-//   });
-//   var hashdata2 =  response.filter(function(record) {
-//     return record.category == hashtag2;
-// });
-//  console.log(hashdata1);
-//  console.log(hashdata2);
-//  updatemap(hashdata1,hashdata2)
-// });
-
-// };
 
 function buildmap() {
   
@@ -274,13 +254,13 @@ d3.json(furl1).then(function(data1){
   var trace1 = {
     x: date_array1,
     y: fav_twtcnt1,
-    mode: "markers",
-    type: "scatter",
+    //mode: "markers",
+    type: "line",
     name: layername1,
-    marker: {
-      color: "blue",
-      symbol: "cross"
-    }
+    //marker: {
+     // color: "blue",
+      //symbol: "cross"
+    //}
   };
   //d3.csv("assets/data/data_2.csv").then(function(data2){
   //d3.csv("assets/data/data_2.csv", function(data2) {
@@ -303,13 +283,13 @@ d3.json(furl1).then(function(data1){
    var trace2 = {
         x: date_array2,
         y: fav_twtcnt2,
-        mode: "markers",
-        type: "scatter",
+        //mode: "markers",
+        type: "line",
         name: layername2,
-        marker: {
-         color: "orange",
-          symbol: "diamond-x"
-        }
+        //marker: {
+         //color: "orange",
+          //symbol: "diamond-x"
+        //}
       };
   
 var data = [trace1,trace2];
@@ -322,7 +302,7 @@ var layout = {
 
 
 
-Plotly.newPlot("plot", data, layout);
+Plotly.newPlot("lineplot", data, layout);
  
 
 });
