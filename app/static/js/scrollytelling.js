@@ -1,4 +1,3 @@
-console.log("print this")
 // Time Slider
 var width = 960;
 

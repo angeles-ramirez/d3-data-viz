@@ -16,8 +16,6 @@
 
 ################################################
 from flask import Flask, jsonify, render_template
-from flask_pymongo import PyMongo
-# import scrape_mars
 
 app = Flask(__name__)
 
@@ -49,16 +47,31 @@ def index():
 def historical(politician: str):
     """Takes a politician's name and returns tweets related to that politician"""
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
+
+    politician_translate = {
+        "BernieSanders" : "#feelthebern",
+        "realDonaldTrump" : "#keepamericagreat",
+        "JoeBiden" : "#TeamJoe",
+        "ewarren" : "#teamwarren",
+        "Chas10Buttigieg" : "#petebuttigieg",
+        "KamalaHarris" : "#kamala",
+        "AndrewYang" : "#YangGang",
+        "tedcruz" : "#tedcruz",
+        "SecretaryCarson" : "#bencarson",
+        "Mike_Pence" : "#mikepence"
+    }
+
+    filter1 = politician_translate[f'{politician}']
+    print(filter1)
     collection = db['hashtagdata']
     
-    sample_tweets = collection.find({}, {'_id': False}).limit(100) # do not return document Id, as this is not serializable
+    sample_tweets = collection.find({"keyword": filter1}, {'_id': False}) #.limit(100) # do not return document Id, as this is not serializable
 
     return jsonify([sample_tweet for sample_tweet in sample_tweets])
 
 @app.route("/api/7day/<politician>")
 def sevenday(politician: str):
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
-
     return "This route is under development"
 
 
