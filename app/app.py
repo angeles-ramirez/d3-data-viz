@@ -21,9 +21,23 @@ from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 
-# # Use flask_pymongo to set up mongo connection
-# app.config["MONGO_URI"] = "mongodb://localhost:27017/project2_testDB"
-# mongo = PyMongo(app)
+#Connect to Mongo DB Atlas
+import pymongo
+from pymongo import MongoClient
+
+deployment_matt = "mongodb+srv://thrum-rw:Skipshot1@thrumcluster-f2hkj.mongodb.net/test?retryWrites=true&w=majority"
+deployment_victor = "mongodb+srv://vgalst:akopova123@tweetering-giclm.mongodb.net/test?retryWrites=true&w=majority"
+testing = "mongodb://localhost:27017/myDatabase"
+
+client = pymongo.MongoClient(deployment_victor)
+db = client.twitter
+serverStatusResult=db.command("serverStatus")
+if serverStatusResult:
+    print("""
+Connection to MongoDB was successful
+    """)
+    print("The following collections are available: ", db.list_collection_names())
+
 
 @app.route("/")
 def index():
@@ -32,28 +46,20 @@ def index():
     return render_template("index.html")
 
 @app.route("/api/historical/<politician>")
-def historical():
+def historical(politician: str):
+    """Takes a politician's name and returns tweets related to that politician"""
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
-    all_tweets = {
-        "tweet1": {"handle" : "BernieSanders",
-                "text": "This is Bernie Sanders Tweeting"},
-        "tweet2": {"handle" : "Donald J. Trump",
-                "text": "This is Trump Tweeting"},
-    }
+    collection = db['hashtagdata']
+    
+    sample_tweets = collection.find({}, {'_id': False}).limit(100) # do not return document Id, as this is not serializable
 
-    return jsonify(all_tweets)
+    return jsonify([sample_tweet for sample_tweet in sample_tweets])
 
 @app.route("/api/7day/<politician>")
-def sevenday():
+def sevenday(politician: str):
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
-    recent_tweets = {
-        "t101": {"handle": "BernieSanders", "time" : 10-12-2019, "text": "We need to raise the minimum wage."},
-        "t102": {"handle": "BernieSanders", "time" : 10-13-2019, "text": "College should be free."},
-        "t103": {"handle": "BernieSanders", "time" : 10-14-2019, "text": "Americans should be from America."},
-        "t104": {"handle": "BernieSanders", "time" : 10-15-2019, "text": "China is the worst."}
-    }
 
-    return jsonify(recent_tweets)
+    return "This route is under development"
 
 
 if __name__ == '__main__':
