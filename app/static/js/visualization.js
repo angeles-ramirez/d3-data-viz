@@ -38,10 +38,12 @@ var politicianDict = {
 var sel1= selectv[0];
 var sel2 = selectv[1];
 console.log(sel1)
-var tag1 = politicianDict.sel1;
+var tag1 = politicianDict[sel1];
 var queryurl1 = 'http://127.0.0.1:5000/api/historical/'+tag1;
-var tag2 = politicianDict.sel2;
+var tag2 = politicianDict[sel2];
 var queryurl2 = 'http://127.0.0.1:5000/api/historical/'+tag2;
+console.log(tag1);
+console.log(tag2);
 console.log(queryurl1);
 console.log(queryurl2);
 d3.select("#keyInputs").remove()
@@ -131,7 +133,7 @@ d3.json(turl).then(function(data)
 };
 buildmap()
 
-function updatemap(furl1,furl2,ftag1,ftag2) {
+function updatemap(queryurl1,queryurl2,tag1,tag2) {
   //document.getElementById('map').innerHTML = "";
   
   
@@ -143,22 +145,21 @@ container._leaflet_id = null;
 
 }
 
-  
-//d3.json(turl).then(function(data) 
-d3.json(furl1).then(function(data1){ 
+
+
+d3.json(queryurl1).then(function(data1){ 
   console.log(data1);
  //var layername1 = ((furl1.substring(0, furl1.length - 4)).split("/"))[2];
- var keyword1 =[] ;
   var heatArray1 = [];
     for (var i = 0; i < data1.length; i++) {
       var lat = data1[i].lat;
       var long = data1[i].long;
-      keyword1.push((data1[i].keyword).slice(1));
+      //keyword1.push((data1[i].keyword).slice(1));
       console.log((data1[i].keyword).slice(1));
         heatArray1.push([lat, long]);
       
     }
-    var layername1 = keyword1[0];
+    var layername1 = tag1;
     console.log(layername1);
   console.log(heatArray1)
     var heatmap1 = L.heatLayer(heatArray1, {
@@ -168,22 +169,22 @@ d3.json(furl1).then(function(data1){
       max: 2000
     });
     
-    d3.json(furl2).then(function(data2){ 
+    d3.json(queryurl2).then(function(data2){ 
       console.log(data2);
       //var layername2 = ((furl2.substring(0, furl2.length - 4)).split("/"))[2];
       
       var heatArray2 = [];
-      var keyword2= [] ;
+     
         for (var i = 0; i < data2.length; i++) {
           var lat2 = data2[i].lat;
           var long2 = data2[i].long;
-           keyword2.push((data2[i].keyword).slice(1));
+          // keyword2.push((data2[i].keyword).slice(1));
           console.log((data2[i].keyword).slice(1));
           console.log(lat2,long2);
             heatArray2.push([lat2, long2]);
           
         }
-        var layername2 = keyword2[0];
+        var layername2 = tag2;
         console.log(layername2);
       console.log(heatArray2)
         var heatmap2 = L.heatLayer(heatArray2, {
