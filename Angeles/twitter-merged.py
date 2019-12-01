@@ -11,10 +11,15 @@ import datetime as DT
 import tweepy
 import functools
 from pprint import pprint
+from opencage.geocoder import OpenCageGeocode
+import geonamescache
+import difflib
+from operator import itemgetter
+import functools
 
 
 # Load credentials from json file:
-os.chdir(r"C:\Users\angy4\BootCamp-HW\d3-data-viz")  # Folder Location
+os.chdir(r"C:\Users\angy4\BootCamp-HW\d3-data-viz")
 with open("twitter_credentials.json", "r") as file:
     creds = json.load(file)
 
@@ -143,7 +148,6 @@ while loop > -1:
                 'User_Name': tweet.user.name,
                 'Tweet_Created_At': str(DT_from_utc_to_local(tweet.created_at)),
                 'Tweet_Text': tweet.text,
-                # How? - get only hashtag text
                 'Hashtags': tweet.entities.get('hashtags'),
                 'User_Location': str(tweet.user.location),
                 'Tweet_Coordinates': str(tweet.coordinates),
@@ -167,6 +171,68 @@ while loop > -1:
                 pass
             listTw.append(outtweets)
             return listTw
+        user_data = pd.DataFrame(listTw)
+
+        # Add city coordinates to dataset and clean data further
+        key = creds['key']
+        geocoder = OpenCageGeocode(key)
+
+        location = user_data[['User_Location']].drop_duplicates()
+        location = location.reset_index()
+
+        # Begin getting coordinates
+        list_lat = []
+        list_long = []
+        for index, row in location.iterrows():
+            try:
+                city = row['User_Location']
+                query = str(city)
+                results = geocoder.geocode(query)
+                lat = results[0]['geometry']['lat']
+                long = results[0]['geometry']['lng']
+                list_lat.append(lat)
+                list_long.append(long)
+            except:
+                list_lat.append(0)
+                list_long.append(0)
+
+        location['lat'] = list_lat
+        location['long'] = list_long
+        user_data = user_data.merge(
+            location, left_on='User_Location', right_on='User_Location')
+        user_data = user_data[['Screen_Name', 'User_Name', 'Tweet_Text', 'Hashtags', 'Tweet_Created_At', 'Favorite_Count',
+                               'Retweet_Count', 'Tweet_URL', 'Tweet_Coordinates', 'Tweet_Place', 'User_Location', 'lat', 'long']]
+        user_data['keyword'] = keyword
+
+        # Connect to Mongo DB Atlas
+        mongokey = creds['mongo']
+        path = "mongodb+srv://vgalst:"+mongokey + \
+            "@tweetering-giclm.mongodb.net/test?retryWrites=true&w=majority"
+        client = pymongo.MongoClient(path)
+        db = client.twitter
+        collection = db['userdata']
+
+        #Only import records that do not exist in dataframe
+        mongodata = pd.DataFrame(list(collection.find()))
+        mongodata = mongodata[['Screen_Name','User_Name','Tweet_Text','Hashtags','Tweet_Created_At','Favorite_Count','Retweet_Count','Tweet_URL','Tweet_Coordinates','Tweet_Place','User_Location','lat','long','keyword']]
+        importdata = pd.merge(user_data, mongodata,  how='left', left_on=['Screen_Name','Tweet_Created_At'], right_on=['Screen_Name','Tweet_Created_At'])
+        importdata['User_Name_y'] = importdata['User_Name_y'].fillna(0)
+        var_is0 = importdata['User_Name_y'] == 0
+        importdata = importdata[conjunction(var_is0)]
+        importdata = importdata[['Screen_Name','User_Name_x','Tweet_Text_x','Hashtags_x','Tweet_Created_At','Favorite_Count_x','Retweet_Count_x','Tweet_URL_x','Tweet_Coordinates_x','Tweet_Place_x','User_Location_x','lat_x','long_x','keyword_x']]
+        importdata = importdata.rename(columns={"User_Name_x": "User_Name", "Tweet_Text_x": "Tweet_Text", "Hashtags_x": "Hashtags", "Favorite_Count_x": "Favorite_Count", "Retweet_Count_x": "Retweet_Count", "Tweet_URL_x": "Tweet_URL", "Tweet_Coordinates_x": "Tweet_Coordinates", "Tweet_Place_x": "Tweet_Place", "User_Location_x": "User_Location", "lat_x": "lat", "long_x": "long", "keyword_x": "keyword"})
+        importdata = importdata.reset_index(drop=True)
+        importdata = importdata.drop_duplicates(subset=['Screen_Name','Tweet_Created_At'])
+        importdata = importdata.set_index(['Tweet_Created_At'])
+
+        #create json file
+        records = json.loads(importdata.T.to_json()).values()
+        collection.insert_many(records)
+        # a = a - 1
+        time.sleep(300)
+
+
+
 
 if __name__ == '__main__':
 
@@ -181,48 +247,176 @@ if __name__ == '__main__':
 #     df_tAll = pd.DataFrame()
 #     df_tAll = pd.concat([df_tAll, df])
 
-# Historical data DF
-tHistorical = pd.DataFrame.from_dict(listTw, orient='columns')
 
-# Hashtag Data
-listTweets = []
-x = 7
-y = 6
-while x > -1:
-    today = DT.date.today()
-    StartDt = today - DT.timedelta(days=x)
-    EndDt = DT.date.today() - DT.timedelta(days=y)
-    searchterm = '#keepamericagreat'
-    keyword = searchterm+' since:' + \
-        str(StartDt)+' until:'+str(EndDt)+' -filter:retweets'
-    NumTweets = 200
 
-    def get_tweets(listTweets, keyword, NumTweets):
-        # Iterate through all tweets containing the given word, api search mode
-        for tweet in tweepy.Cursor(api.search, q=keyword).items(NumTweets):
-            # Add tweets in this format
-            dict_ = {'Screen_Name': tweet.user.screen_name,
-                     'User_Name': tweet.user.name,
-                     'Tweet_Created_At': str(DT_from_utc_to_local(tweet.created_at)),
-                     'Tweet_Text': tweet.text,
-                     # How? - get only hashtag text
-                     'Hashtags': tweet.entities.get('hashtags'),
-                     'User_Location': str(tweet.user.location),
-                     'Tweet_Coordinates': str(tweet.coordinates),
-                     'Tweet_Place': str(tweet.place),
-                     'Retweet_Count': str(tweet.retweet_count),
-                     'Retweeted': str(tweet.retweeted),
-                     'Favorite_Count': str(tweet.favorite_count),
-                     'Favorited': str(tweet.favorited),
-                     'Replied': str(tweet.in_reply_to_status_id_str),
-                     # How? - get only expanded url?
-                     'Tweet_URL': tweet.entities.get('urls')
-                     }
-            listTweets.append(dict_)
-        return listTweets
-    get_tweets(listTweets, keyword, NumTweets)
-    x = x - 1
-    y = y - 1
-    df = pd.DataFrame(listTweets)
-    df_all = pd.DataFrame()
-    df_all = pd.concat([df_all, df])
+
+############### Hashtag Data ##################
+def hashtag_scrape():
+
+    # Set up Tweepy Authentication
+    auth = tweepy.OAuthHandler(creds['CONSUMER_KEY'], creds['CONSUMER_SECRET'])
+    auth.set_access_token(creds['ACCESS_TOKEN'], creds['ACCESS_SECRET'])
+    api = tweepy.API(auth)
+
+    # List of hashtags --> hashtags array // a = amount of hashtags
+    a = 7
+    while a > -1:
+        # Begin API Scrape
+        listTweets = []
+        x = 7
+        y = 6
+
+        while x > -1:
+            today = DT.date.today()
+            StartDt = today - DT.timedelta(days=x)
+            EndDt = DT.date.today() - DT.timedelta(days=y)
+            searchterm = itemgetter(a)(hashtags)
+            keyword = searchterm+' since:' + \
+                str(StartDt)+' until:'+str(EndDt)+' -filter:retweets'
+            NumTweets = 200
+
+            def get_tweets(listTweets, keyword, NumTweets):
+                # Iterate through all tweets containing the given word, api search mode
+                for tweet in tweepy.Cursor(api.search, q=keyword, lang='en').items(NumTweets):
+                    # Add tweets in this format
+                    dict_ = {'Screen_Name': tweet.user.screen_name,
+                             'User_Name': tweet.user.name,
+                             'Tweet_Created_At': str(DT_from_utc_to_local(tweet.created_at)),
+                             'Tweet_Text': tweet.text,
+                             # How? - get only hashtag text
+                             'Hashtags': tweet.entities.get('hashtags'),
+                             'User_Location': str(tweet.user.location),
+                             'Tweet_Coordinates': str(tweet.coordinates),
+                             'Tweet_Place': str(tweet.place),
+                             'Retweet_Count': str(tweet.retweet_count),
+                             'Retweeted': str(tweet.retweeted),
+                             'Favorite_Count': str(tweet.favorite_count),
+                             'Favorited': str(tweet.favorited),
+                             'Replied': str(tweet.in_reply_to_status_id_str),
+                             # How? - get only expanded url?
+                             'Tweet_URL': tweet.entities.get('urls')
+                             }
+                    listTweets.append(dict_)
+                return listTweets
+
+            get_tweets(listTweets, keyword, NumTweets)
+            x = x - 1
+            y = y - 1
+            df = pd.DataFrame(listTweets)
+            df_all = pd.DataFrame()
+            df_all = pd.concat([df_all, df])
+            twitter_data = df_all
+
+            # Clean Data
+            twitter_data = twitter_data.dropna(subset=['User_Location'])
+            twitter_data = twitter_data.drop_duplicates(subset=['Screen_Name'])
+            gc = geonamescache.GeonamesCache()
+            s = gc.get_us_states()
+            c = gc.get_cities()
+
+            US_States = [s[key]['name']
+                         for key in list(s.keys())]
+
+            US_ST = [s[key]['code']+', USA'
+                     for key in list(s.keys())]
+
+            US_Cities = [c[key]['name']
+                         for key in list(c.keys()) if c[key]['countrycode'] == 'US']
+
+            State = pd.DataFrame(US_States)
+
+            ST = pd.DataFrame(US_ST)
+
+            City = pd.DataFrame(US_Cities)
+
+            df = pd.concat([State, ST, City])
+
+            df.rename(columns={0: 'Location'}, inplace=True)
+
+            left_on = ["Location"]
+
+            right_on = ["User_Location"]
+
+            fuzzy_data = twitter_data[['User_Location']]
+            fuzzy_data = fuzzy_data.dropna(subset=['User_Location'])
+            fuzzy_data = fuzzy_data.drop_duplicates(subset=['User_Location'])
+            fuzzy_data = fuzzymatcher.fuzzy_left_join(
+                df, fuzzy_data, left_on, right_on)
+            var_fuzzy = fuzzy_data['best_match_score'] > 0
+            fuzzy_data = fuzzy_data[conjunction(var_fuzzy)]
+            fuzzy_data = fuzzy_data[['User_Location']]
+            fuzzy_data = fuzzy_data.drop_duplicates(subset=['User_Location'])
+            twitter_data = pd.merge(twitter_data, fuzzy_data, how='inner', on=[
+                                    'User_Location', 'User_Location'])
+            twitter_data = twitter_data[['Screen_Name', 'User_Name', 'Tweet_Text', 'Hashtags',
+                                         'Tweet_Created_At', 'Favorite_Count', 'Retweet_Count', 'Tweet_URL', 'User_Location']]
+
+            # Add city coordinates to dataset and clean data further
+            twitter_data = twitter_data.reset_index()
+            key = creds['key']
+            geocoder = OpenCageGeocode(key)
+
+            location = twitter_data[['User_Location']].drop_duplicates()
+            location = location.reset_index()
+            Var_Empty = location['User_Location'] != ''
+            location = location[conjunction(Var_Empty)]
+            # Begin getting coordinates
+            list_lat = []
+            list_long = []
+            for index, row in location.iterrows():
+                try:
+                    city = row['User_Location']
+                    query = str(city)
+                    results = geocoder.geocode(query)
+                    lat = results[0]['geometry']['lat']
+                    long = results[0]['geometry']['lng']
+                    list_lat.append(lat)
+                    list_long.append(long)
+                except:
+                    list_lat.append(0)
+                    list_long.append(0)
+
+            location['lat'] = list_lat
+            location['long'] = list_long
+            twitter_data = twitter_data.merge(
+                location, left_on='User_Location', right_on='User_Location')
+
+            Var_0 = twitter_data['lat'] != 0
+            twitter_data = twitter_data[conjunction(Var_0)]
+            twitter_data = twitter_data[['Screen_Name', 'User_Name', 'Tweet_Text', 'Hashtags',
+                                         'Tweet_Created_At', 'Favorite_Count', 'Retweet_Count', 'Tweet_URL', 'User_Location', 'lat', 'long']]
+            twitter_data['keyword'] = searchterm
+
+            # Connect to Mongo DB Atlas
+            mongokey = creds['mongo']
+            path = "mongodb+srv://vgalst:"+mongokey + \
+                "@tweetering-giclm.mongodb.net/test?retryWrites=true&w=majority"
+            client = pymongo.MongoClient(path)
+            db = client.twitter
+            collection = db['hashtagdata']
+
+            # Only import records that do not exist in dataframe
+            mongodata = pd.DataFrame(list(collection.find()))
+            mongodata = mongodata[['Screen_Name', 'User_Name', 'Tweet_Text', 'Hashtags', 'Tweet_Created_At',
+                                   'Favorite_Count', 'Retweet_Count', 'Tweet_URL', 'User_Location', 'lat', 'long']]
+            importdata = pd.merge(twitter_data, mongodata,  how='left', left_on=[
+                                  'Screen_Name', 'Tweet_Created_At'], right_on=['Screen_Name', 'Tweet_Created_At'])
+            importdata['User_Name_y'] = importdata['User_Name_y'].fillna(0)
+            var_is0 = importdata['User_Name_y'] == 0
+            importdata = importdata[conjunction(var_is0)]
+            importdata = importdata[['Screen_Name', 'User_Name_x', 'Tweet_Text_x', 'Hashtags_x', 'Tweet_Created_At',
+                                     'Favorite_Count_x', 'Retweet_Count_x', 'Tweet_URL_x', 'User_Location_x', 'lat_x', 'long_x', 'keyword']]
+            importdata = importdata.rename(columns={"User_Name_x": "User_Name", "Tweet_Text_x": "Tweet_Text", "Hashtags_x": "Hashtags", "Favorite_Count_x": "Favorite_Count",
+                                                    "Retweet_Count_x": "Retweet_Count", "Tweet_URL_x": "Tweet_URL", "User_Location_x": "User_Location", "lat_x": "lat", "long_x": "long"})
+            # create json file
+            records = json.loads(importdata.T.to_json()).values()
+            # Insert Into Mongo
+            collection.insert_many(records)
+            a = a - 1
+            time.sleep(300)
+
+if __name__ == '__main__':
+    hashtag_scrape()
+
+
+
