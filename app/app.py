@@ -43,7 +43,7 @@ def index():
     # Render the template. See javascript files for functionality
     return render_template("index.html")
 
-@app.route("/api/history/<user_name>")
+@app.route("/api/historical/<user_name>")
 def historical(user_name: str):
     """Takes a politician's name and returns tweets related to that politician"""
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
