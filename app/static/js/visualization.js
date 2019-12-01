@@ -39,9 +39,9 @@ var sel1= selectv[0];
 var sel2 = selectv[1];
 console.log(sel1)
 var tag1 = politicianDict[sel1];
-var queryurl1 = 'http://127.0.0.1:5000/api/historical/'+tag1;
+var queryurl1 = window.location.href + '/api/historical/' + tag1;
 var tag2 = politicianDict[sel2];
-var queryurl2 = 'http://127.0.0.1:5000/api/historical/'+tag2;
+var queryurl2 = window.location.href + '/api/historical/'+tag2;
 console.log(tag1);
 console.log(tag2);
 console.log(queryurl1);
@@ -91,7 +91,7 @@ var myMap = L.map("map", {
   zoom: 5,
   layers: [darkmap]});
 // test ---
-var turl = "http://127.0.0.1:5000/api/historical/realDonaldTrump";
+var turl = window.location.href + "api/historical/realDonaldTrump";
 console.log(turl);
 d3.json(turl).then(function(data)
 {
