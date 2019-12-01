@@ -43,11 +43,21 @@ def index():
     # Render the template. See javascript files for functionality
     return render_template("index.html")
 
-@app.route("/api/historical/<politician>")
-def historical(politician: str):
+@app.route("/api/history/<user_name>")
+def historical(user_name: str):
     """Takes a politician's name and returns tweets related to that politician"""
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
 
+    collection = db['userdata']
+    
+    sample_tweets = collection.find({"Screen_Name": user_name}, {'_id': False}) #.limit(100) # do not return document Id, as this is not serializable
+
+    return jsonify([sample_tweet for sample_tweet in sample_tweets])
+
+@app.route("/api/hashtag/<user_name>")
+def sevenday(user_name: str):
+    # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
+    
     politician_translate = {
         "BernieSanders" : "#feelthebern",
         "realDonaldTrump" : "#keepamericagreat",
@@ -61,7 +71,7 @@ def historical(politician: str):
         "Mike_Pence" : "#mikepence"
     }
 
-    filter1 = politician_translate[f'{politician}']
+    filter1 = politician_translate[f'{user_name}']
     print(filter1)
     collection = db['hashtagdata']
     
@@ -69,10 +79,6 @@ def historical(politician: str):
 
     return jsonify([sample_tweet for sample_tweet in sample_tweets])
 
-@app.route("/api/7day/<politician>")
-def sevenday(politician: str):
-    # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
-    return "This route is under development"
 
 
 if __name__ == '__main__':
