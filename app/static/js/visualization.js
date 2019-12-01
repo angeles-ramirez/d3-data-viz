@@ -39,15 +39,15 @@ var sel1= selectv[0];
 var sel2 = selectv[1];
 console.log(sel1)
 var tag1 = politicianDict[sel1];
-var queryurl1 = window.location.href + '/api/historical/' + tag1;
+var queryurl1 = window.location.href + 'api/hashtag/' + tag1;
 var tag2 = politicianDict[sel2];
-var queryurl2 = window.location.href + '/api/historical/'+tag2;
+var queryurl2 = window.location.href + 'api/hashtag/'+tag2;
 console.log(tag1);
 console.log(tag2);
 console.log(queryurl1);
 console.log(queryurl2);
 d3.select("#keyInputs").remove()
-  // Build the plot with the new stock
+  // Build the plot with the new hastag
 
 
 
