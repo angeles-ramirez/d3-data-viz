@@ -16,7 +16,9 @@ import geonamescache
 import difflib
 from operator import itemgetter
 import functools
-
+import fuzzy_matcher
+from fuzzy_matcher import process
+from fuzzywuzzy import fuzz
 
 # Load credentials from json file:
 os.chdir(r"C:\Users\angy4\BootCamp-HW\d3-data-viz")
@@ -340,7 +342,7 @@ def hashtag_scrape():
             fuzzy_data = twitter_data[['User_Location']]
             fuzzy_data = fuzzy_data.dropna(subset=['User_Location'])
             fuzzy_data = fuzzy_data.drop_duplicates(subset=['User_Location'])
-            fuzzy_data = fuzzymatcher.fuzzy_left_join(
+            fuzzy_data = fuzzy_matcher.fuzzy_left_join(
                 df, fuzzy_data, left_on, right_on)
             var_fuzzy = fuzzy_data['best_match_score'] > 0
             fuzzy_data = fuzzy_data[conjunction(var_fuzzy)]
