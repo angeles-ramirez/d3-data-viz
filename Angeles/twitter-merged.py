@@ -16,9 +16,12 @@ import geonamescache
 import difflib
 from operator import itemgetter
 import functools
-import fuzzy_matcher
+import fuzzy_matcher as fuzzymatcher
 from fuzzy_matcher import process
+from fuzzyjoin import io
 from fuzzywuzzy import fuzz
+import pandas_dedupe
+
 
 # Load credentials from json file:
 os.chdir(r"C:\Users\angy4\BootCamp-HW\d3-data-viz")
@@ -204,7 +207,7 @@ while loop > -1:
             location, left_on='User_Location', right_on='User_Location')
         user_data = user_data[['Screen_Name', 'User_Name', 'Tweet_Text', 'Hashtags', 'Tweet_Created_At', 'Favorite_Count',
                                'Retweet_Count', 'Tweet_URL', 'Tweet_Coordinates', 'Tweet_Place', 'User_Location', 'lat', 'long']]
-        user_data['keyword'] = keyword
+        # user_data['keyword'] = keyword
 
         # Connect to Mongo DB Atlas
         mongokey = creds['mongo']
@@ -261,6 +264,7 @@ def hashtag_scrape():
     api = tweepy.API(auth)
 
     # List of hashtags --> hashtags array // a = amount of hashtags
+    
     a = 7
     while a > -1:
         # Begin API Scrape
@@ -274,7 +278,7 @@ def hashtag_scrape():
             EndDt = DT.date.today() - DT.timedelta(days=y)
             searchterm = itemgetter(a)(hashtags)
             keyword = searchterm+' since:' + \
-                str(StartDt)+' until:'+str(EndDt)+' -filter:retweets'
+            str(StartDt)+' until:'+str(EndDt)+' -filter:retweets'
             NumTweets = 200
 
             def get_tweets(listTweets, keyword, NumTweets):
@@ -342,7 +346,8 @@ def hashtag_scrape():
             fuzzy_data = twitter_data[['User_Location']]
             fuzzy_data = fuzzy_data.dropna(subset=['User_Location'])
             fuzzy_data = fuzzy_data.drop_duplicates(subset=['User_Location'])
-            fuzzy_data = fuzzy_matcher.fuzzy_left_join(
+            #fuzzy_left_join not working on Windows so pandas_dedupe was used as alternative
+            fuzzy_data = pandas_dedupe.dedupe_dataframe(
                 df, fuzzy_data, left_on, right_on)
             var_fuzzy = fuzzy_data['best_match_score'] > 0
             fuzzy_data = fuzzy_data[conjunction(var_fuzzy)]

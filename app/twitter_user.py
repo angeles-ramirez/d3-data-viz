@@ -18,7 +18,7 @@ import difflib
 from operator import itemgetter
 import functools
 import fuzzy_matcher
-from fuzzy_matcher import process
+from fuzzyjoin import io
 from fuzzywuzzy import fuzz
 
 # Load credentials from json file:
