@@ -48,17 +48,16 @@ console.log(tag1);
 console.log(tag2);
 console.log(queryurl1);
 console.log(queryurl2);
+analyzeTweets(queryurlplot1);
+analyzeTweets(queryurlplot2);
+
 d3.select("#keyInputs").remove()
   // Build the plot with the new hastag
-
-
 
  //filterdata(queryurl1,queryurl2);
  updatemap(queryurl1,queryurl2,tag1,tag2,queryurlplot1,queryurlplot2);
 
 };
-
-
 
 function buildmap() {
   

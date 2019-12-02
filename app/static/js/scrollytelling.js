@@ -1,44 +1,7 @@
-// Time Slider
-var width = 960;
-
 //-------------------------------------------------------
 // Scrollytelling
 //-------------------------------------------------------
 
-// Step 1.1 text
-var politician1 = "Bernie Sanders";
-var p1State = "New Hampshire";
-var politician2 = "Donald Trump";
-var p2State = "Texas";
-var winner = politician1;
-var loser = politician2;
-var p1TweetRate = 3;
-var p2TweetRate = 4.4;
-var tweetRange = 500;
-var heavyTweeter = politician2;
-var lightTweeter = politician1;
-var tweetDifferential = 33;
-var p1TweetVocab = ["middle", "class", "fair", "America", "Americans"];
-var p2TweetVocab = ["great", 'wonderful', 'best', 'greatest', 'thanks'];
-var p1TopTweetDate = "10-12-2019";
-var p2TopTweetDate = "08-12-2019";
-
-var s11Text = `${politician1} is furthest ahead of ${politician2} in: ${p1State}`;
-var s12Text = `${politician2} is furthest ahead of ${politician1} in: ${p2State}`;
-var s13Text = `${winner} has more popularity on Twitter overall than ${loser}`;
-
-var s21Text = `${politician1} has averaged ${p1TweetRate} tweets per day in the last ${tweetRange} days`;
-var s22Text = `${politician2} has averaged ${p2TweetRate} tweets per day in the last ${tweetRange} days`;
-var s23Text = `${heavyTweeter} has tweeted ${tweetDifferential}% more that ${lightTweeter} in the last ${tweetRange} days`;
-
-var s31Text = `The five most common words in ${politician1}'s tweets are: ${p1TweetVocab[0]}, ${p1TweetVocab[1]}, ${p1TweetVocab[2]}, ${p1TweetVocab[3]}, ${p1TweetVocab[4]}`;
-var s32Text = `The five most common words in ${politician2}'s tweets are: ${p2TweetVocab[0]}, ${p2TweetVocab[1]}, ${p2TweetVocab[2]}, ${p2TweetVocab[3]}, ${p2TweetVocab[4]}`;
-var s33Text = `${politician1}'s most popular tweet, which occured on ${p1TopTweetDate}, said this: `;
-var s34Text = `${politician2}'s most popular tweet, which occured on ${p2TopTweetDate},  said this: `;
-
-var arr = [s11Text, s12Text, s13Text,
-          s21Text, s22Text, s23Text,
-          s31Text, s32Text, s33Text, s34Text];
 
 // using d3 for convenience
 var main = d3.select('main')
@@ -185,9 +148,4 @@ function init() {
 // kick things off
 init();
 
-// Set up messages
-d3.selectAll('.stepText')
-.data(arr)
-.text(function (d) {
-  console.log(d);
-  return d;})
+
