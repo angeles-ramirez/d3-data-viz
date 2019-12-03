@@ -88,7 +88,7 @@
                 <option>Mike Pence</option>
               </select>
             </div>
-            <button id="button" type="button" class="btn btn-default">Search</button>
+            <button id="button" type="button" class="btn btn-default">Create Comparison</button>
             <!--button id="refreashbutton" type="button" class="btn btn-default">Refreash</button-->
           </form>
         </div>
@@ -210,8 +210,11 @@
   <!-- text analysis functions -->
   <script type="text/javascript" src="{{url_for('static', filename='js/textanalysis.js')}}"></script>
 
-  <!-- Mapping javascript -->
+  <!-- Mapping and plotting functions -->
   <script type="text/javascript" src="{{url_for('static', filename='js/visualization.js')}}"></script>
+
+  <!-- Monitors user inputs, populates webpage -->
+  <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
 
 
 
