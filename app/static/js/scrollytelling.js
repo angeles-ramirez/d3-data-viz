@@ -1,5 +1,5 @@
 //-------------------------------------------------------
-// Scrollytelling
+// Scrollytelling handles scrolling events
 //-------------------------------------------------------
 
 
@@ -91,7 +91,7 @@ function handleStepEnter3(response) {
   })
 
   // update graphic based on step
-  figure3.select('p').text(response.index + 1);
+  //figure3.select('p').text(response.index + 1);
 
 }
 

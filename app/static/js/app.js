@@ -90,14 +90,19 @@ function handleSubmit() {
 
     // Make API calls and analyze responses
     d3.json(userUrl1).then(function(data){
-        textAnalysis = analyzeTweets(data);
-        timeAnalysis = tweetReachVsTime(data);
+        textAnalysis = analyzeTweets(data); // perform text analysis of the tweets
+        tweetReachVsTime(data); // perform text analysis of the tweets
+        console.log(textAnalysis)
+        // Set up messages
+        d3.select('#figure3')
+        .html(`<p>Most Popular Tweet: <br> ${textAnalysis.mostPopular}<br><br>
+                Most used (uncommon) words: <br> ${textAnalysis.vocab}<p>`)
     });
 
     // Make API calls and analyze responses
     d3.json(userUrl2).then(function(data){
         textAnalysis = analyzeTweets(data);
-        timeAnalysis = tweetReachVsTime(data);
+        tweetReachVsTime(data);
     });
 
 
