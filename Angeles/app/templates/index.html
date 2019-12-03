@@ -29,7 +29,23 @@
 
   <!-- D3 -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- Gradient Bar -->
+  <style type="text/css">
+    .axis text {
+      font: 10px sans-serif;
+    }
 
+    .axis line,
+    .axis path {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    svg {
+      padding-left: 50px;
+    }
+  </style>
   <!-- Multiselect Bootstrap Addon -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -127,6 +143,73 @@
             <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
               Quantitative Data is word-based so it describes qualities of things. An example would be
               a heatmap with a color gradiant scale because each color represents a range of numerical values.
+
+              <!-- Start: Gradient Bar -->
+              <div id="legend1"></div>
+              <script type="text/javascript">
+                var w = 300, h = 50;
+
+                var key = d3.select("#legend1")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+                var legend = key.append("defs")
+                  .append("svg:linearGradient")
+                  .attr("id", "gradient")
+                  .attr("x1", "0%")
+                  .attr("y1", "100%")
+                  .attr("x2", "100%")
+                  .attr("y2", "100%")
+                  .attr("spreadMethod", "pad");
+
+                legend.append("stop")
+                  .attr("offset", "0%")
+                  .attr("stop-color", "#f7fcf0")
+                  .attr("stop-opacity", 1);
+
+                legend.append("stop")
+                  .attr("offset", "33%")
+                  .attr("stop-color", "#bae4bc")
+                  .attr("stop-opacity", 1);
+
+                legend.append("stop")
+                  .attr("offset", "66%")
+                  .attr("stop-color", "#7bccc4")
+                  .attr("stop-opacity", 1);
+
+                legend.append("stop")
+                  .attr("offset", "100%")
+                  .attr("stop-color", "#084081")
+                  .attr("stop-opacity", 1);
+
+                key.append("rect")
+                  .attr("width", w)
+                  .attr("height", h - 30)
+                  .style("fill", "url(#gradient)")
+                  .attr("transform", "translate(0,10)");
+
+                var y = d3.scaleLinear()
+                  .range([300, 0])
+                  .domain([68, 12]);
+
+                var yAxis = d3.axisBottom()
+                  .scale(y)
+                  .ticks(5);
+
+                key.append("g")
+                  .attr("class", "y axis")
+                  .attr("transform", "translate(0,30)")
+                  .call(yAxis)
+                  .append("text")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 0)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("axis title");
+              </script>
+
+              <!-- End Gradient Bar -->
 
             </h2><br><br><br>
             <!-- additional images -->
