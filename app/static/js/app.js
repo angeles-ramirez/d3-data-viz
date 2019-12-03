@@ -12,7 +12,8 @@ var myMap = buildMap();
 var layerControl = L.control.layers({}).addTo(myMap); // update the leaflet control with the named heatlayer
 
 // Initialize plot
-Plotly.newPlot("lineplot", 
+function initializePlot(){
+    Plotly.newPlot("lineplot", 
     [], 
     {
         autosize: true,
@@ -27,8 +28,11 @@ Plotly.newPlot("lineplot",
         b: 100,
         t: 100,
         pad: 4
+        }
     }
-});
+    );
+}
+
 
 // Select user choices from multi drop down
 var selectv = [] // array of the selected politicians
@@ -43,10 +47,41 @@ d3.select("#keyInputs").on("change",function(d){
     selectv = values
 })
 
+// Function for showing loading status
+function loadingFunction() {
+    var x = document.getElementById("loadingDiv");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    }
+  }
+
+// Function for hiding the loading status
+function completeFunction() {
+    var x = document.getElementById("loadingDiv");
+    if (x.style.display !== "none") {
+      x.style.display = "none";
+    }
+  }
+
 function handleSubmit() {
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
+    loadingFunction(); // show loading spinnner
+
+    let i = 0;
+    myMap.eachLayer(function(layer){ 
+        if (i > 0){
+            myMap.removeLayer(layer)
+        } 
+        i += 1; 
+    });
+    console.log('Map has', i, 'layers.');
+
+    //buildMap();
+
+    initializePlot(); // clear line plot
+
     // Table which translates form selection into twitter username
     var politicianDict = {
         "Bernie Sanders" :"BernieSanders",
@@ -105,8 +140,8 @@ function handleSubmit() {
     d3.json(userUrl2).then(function(data){
         textAnalysis = analyzeTweets(data);
         tweetReachVsTime(data);
+        completeFunction(); // hide spinner once API calls have returned
     });
-
 
 };
 
