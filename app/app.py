@@ -44,6 +44,12 @@ def index():
     # Render the template. See javascript files for functionality
     return render_template("index.html")
 
+@app.route("/about")
+def about():
+
+    # Render the template. See javascript files for functionality
+    return render_template("about.html")
+
 
 @app.route("/api/historical/<user_name>")
 def twitter_user(user_name: str):
