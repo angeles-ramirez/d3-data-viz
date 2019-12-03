@@ -115,14 +115,14 @@ function handleSubmit() {
     //---------------------------------------
 
     d3.json(hashtagUrl1).then(function(data){
-        heatlayer = createHeatLayer(data, "FUCHSIA", myMap) // Create a heatlayer in fuschia and add it to the map
-        layerControl.addOverlay(heatlayer, selectv[0]); // add the heatlayer to the Leaflet control
+        heatlayer = createHeatLayer(data, "SkyBlue", myMap) // Create a heatlayer in fuschia and add it to the map
+        layerControl.addOverlay(heatlayer, selectv[0].fontcolor("SkyBlue")); // add the heatlayer to the Leaflet control
     });
 
     // Make API calls and analyze responses
     d3.json(hashtagUrl2).then(function(data){
         heatlayer = createHeatLayer(data, "ORANGE", myMap) // Create a heatlayer in orange and add it to the map
-        layerControl.addOverlay(heatlayer, selectv[1]); // add the heatlayer to the Leaflet control
+        layerControl.addOverlay(heatlayer, selectv[1].fontcolor("ORANGE")); // add the heatlayer to the Leaflet control
     });
 
     // Make API calls and analyze responses

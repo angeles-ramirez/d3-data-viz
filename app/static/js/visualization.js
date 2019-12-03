@@ -55,18 +55,33 @@ function createHeatLayer(data, colorString, mapObject){
 // given a set of tweets, create and add a heat layer the given map object
 
   var heatArray = [];
+  var heatMarkers =[];
+
   for (var i = 0; i < data.length; i++) {
     var lat = data[i].lat;
     var long = data[i].long;
     heatArray.push([lat, long]);
+    heatMarkers.push(L.circle([lat, long],{
+      stroke: false,
+      fillOpacity: 1,
+      color: colorString,
+      fillColor: colorString,
+      radius: 20000
+    }
+));
   }
 
-  var heatmap = L.heatLayer(heatArray, {
-    radius: 15,
-    blur: 1,
-    gradient : {1: colorString},
-    max: 2000
-  }).addTo(mapObject);
+  // var heatmap = L.heatLayer(heatArray, {
+  //   radius: 15,
+  //   blur: 1,
+  //   gradient : {1: colorString},
+    
+  //   max: 2000
+  // }).addTo(mapObject);
+
+  var heatmap = L.layerGroup(heatMarkers).addTo(mapObject);
+
+  
 
   return heatmap
   
