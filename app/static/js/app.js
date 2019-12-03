@@ -9,7 +9,7 @@ clearMap();
 var myMap = buildMap();
 
 // Add an empty contorl to map
-var layerControl = L.control.layers({}).addTo(myMap); // update the leaflet control with the named heatlayer
+var layerControl = L.control.layers({}, {}, {collapsed:false}).addTo(myMap); // update the leaflet control with the named heatlayer
 
 // Initialize plot
 function initializePlot(){
@@ -21,7 +21,7 @@ function initializePlot(){
         title: "Popularity on Twitter vs. Time",
         xaxis: { title: "Date"},
         yaxis: { title: "Retweets + Favorites" },
-        height: 650,
+        //height: 650,
         margin: {
         l: 50,
         r: 50,
@@ -32,7 +32,6 @@ function initializePlot(){
     }
     );
 }
-
 
 // Select user choices from multi drop down
 var selectv = [] // array of the selected politicians
@@ -73,6 +72,7 @@ function handleSubmit() {
     myMap.eachLayer(function(layer){ 
         if (i > 0){
             myMap.removeLayer(layer)
+            layerControl.removeLayer(layer)
         } 
         i += 1; 
     });
@@ -81,6 +81,8 @@ function handleSubmit() {
     //buildMap();
 
     initializePlot(); // clear line plot
+
+    var mostPopularP = "" // initializa most popular tweet text
 
     // Table which translates form selection into twitter username
     var politicianDict = {
@@ -117,6 +119,7 @@ function handleSubmit() {
     d3.json(hashtagUrl1).then(function(data){
         heatlayer = createHeatLayer(data, "SkyBlue", myMap) // Create a heatlayer in fuschia and add it to the map
         layerControl.addOverlay(heatlayer, selectv[0].fontcolor("SkyBlue")); // add the heatlayer to the Leaflet control
+        layerControl.expand(); // expand the layer control
     });
 
     // Make API calls and analyze responses
@@ -131,9 +134,8 @@ function handleSubmit() {
         tweetReachVsTime(data); // perform text analysis of the tweets
         console.log(textAnalysis)
         // Set up messages
-        d3.select('#figure3')
-        .html(`<p>Most Popular Tweet: <br> ${textAnalysis.mostPopular}<br><br>
-                Most used (uncommon) words: <br> ${textAnalysis.vocab}<p>`)
+        d3.select('#figure3').insert("p").html(`<br>${selectv[0]}'s Most Popular Tweet: <br><br><strong>${textAnalysis.mostPopular}</strong><br><br>
+        was retweeted ${textAnalysis.retweetCount} times<br>`).style("color", "#1f77b4") // Plotly "muted blue"
     });
 
     // Make API calls and analyze responses
@@ -141,6 +143,8 @@ function handleSubmit() {
         textAnalysis = analyzeTweets(data);
         tweetReachVsTime(data);
         completeFunction(); // hide spinner once API calls have returned
+        d3.select('#figure3').insert("p").html(`<br>${selectv[1]}'s Most Popular Tweet: <br><br><strong>${textAnalysis.mostPopular}</strong><br><br>
+        was retweeted ${textAnalysis.retweetCount} times<br>`).style("color", "#ff7f0e") // Plotly "safety orange"
     });
 
 };

@@ -66,7 +66,7 @@ function createHeatLayer(data, colorString, mapObject){
       fillOpacity: 1,
       color: colorString,
       fillColor: colorString,
-      radius: 20000
+      radius: 15000
     }
 ));
   }

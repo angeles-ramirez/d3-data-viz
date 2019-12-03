@@ -58,15 +58,15 @@ figure {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  background-color: #fcf4ee;
+  background-color: #f1f1f1;
   z-index: 0;
 }
 
 figure p {
   text-align: center;
   padding: 1rem;
-  position: absolute;
-  top: 50%;
+  position: relative;
+  top: 25%;
   left: 50%;
   -moz-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -100,6 +100,3 @@ figure p {
   background-color: #f3f3f3;
 }
 
-
-/* set map, body, and html to 100% of the screen size */
-#map { height: 650px; }
