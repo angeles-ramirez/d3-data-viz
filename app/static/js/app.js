@@ -58,7 +58,9 @@ function handleSubmit() {
         "Andrew Yang":"AndrewYang",
         "Ted Cruz":"tedcruz",
         "Ben Carson": "SecretaryCarson",
-        "Mike Pence":"Mike_Pence"
+        "Mike Pence":"Mike_Pence",
+        "Michael Bloomberg":"MikeBloomberg",
+        "Tulsi Gabbard":"TulsiGabbard"
     }
 
     // Translate dropdown selection into username

@@ -62,20 +62,22 @@ def twitter_user(user_name: str):
 def sevenday(user_name: str):
     # @TODO: create a function that connects to the mongo database and gathers tweets related to the politician in question
 
-    politician_translate = {
-        "BernieSanders": "#feelthebern",
-        "realDonaldTrump": "#keepamericagreat",
+    politician_translate_hashtag = {
+        "BernieSanders": "#FeelTheBern",
+        "realDonaldTrump": "#KeepAmericaGreat",
         "JoeBiden": "#TeamJoe",
-        "ewarren": "#teamwarren",
-        "Chas10Buttigieg": "#petebuttigieg",
-        "KamalaHarris": "#kamala",
+        "ewarren": "#TeamWarren",
+        "Chas10Buttigieg": "#PeteButtigieg",
+        "KamalaHarris": "#KamalaHarris",
         "AndrewYang": "#YangGang",
-        "tedcruz": "#tedcruz",
-        "SecretaryCarson": "#bencarson",
-        "Mike_Pence": "#mikepence"
+        "tedcruz": "#TedCruz",
+        "SecretaryCarson": "#BenCarson",
+        "Mike_Pence": "#MikePence",
+        "MikeBloomberg": "#MikeBloomberg",
+        "TulsiGabbard": "#TulsiGabbard"
     }
 
-    filter1 = politician_translate[f'{user_name}']
+    filter1 = politician_translate_hashtag[f'{user_name}']
     print(filter1)
     collection = db['hashtagdata']
 
