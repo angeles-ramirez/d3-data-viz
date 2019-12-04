@@ -95,9 +95,15 @@
         <h1 style="padding-top: 20px; font-size: xx-large;"><b>Political Reach on Twitter Without the Political
             Advertising</b>
         </h1>
+        <!-- Brief Summary -->
+        <h4 style="font-size: x-large;padding-top: 60px;padding-bottom:60px;text-align: center; font-style: italic;" ;>
+          We looked at the quantitative and qualitative data of some of this year’s most popular politician’s
+          and Presidential candidates to find out how they all compare.
+        </h4>
+        <!-- Brief Summary End-->
         <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">On October 30th, 2019,
-          Twitter’s CEO,
-          Jack Dorsey announced that Twitter will stop accepting political ads to reduce significant risk to politics.
+          Twitter’s CEO, Jack Dorsey announced that Twitter will stop accepting political ads to reduce significant risk
+          to politics.
         </h2><br><br><br>
 
         <img src="../static/images/tweet1.jpg" class="rounded"
@@ -113,8 +119,7 @@
       <div class="col-xs-12 col-md-12">
 
         <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 50px;">The
-          announcement comes amid
-          the scrutiny of social media companies’ handling of political ads. Large social media
+          announcement comes amid the scrutiny of social media companies’ handling of political ads. Large social media
           companies, such as Facebook, have been criticized for allowing politicians to run false advertisements.
         </h2><br><br><br>
       </div>
@@ -141,75 +146,12 @@
                 Data</b>
             </h1>
             <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
-              Quantitative Data is word-based so it describes qualities of things. An example would be
-              a heatmap with a color gradiant scale because each color represents a range of numerical values.
+              Quantitative Data are measures of values or counts and are expressed as numbers. So, it answers
+              "how much?" and "how many?"
 
-              <!-- Start: Gradient Bar -->
-              <div id="legend1"></div>
-              <script type="text/javascript">
-                var w = 300, h = 50;
-
-                var key = d3.select("#legend1")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-
-                var legend = key.append("defs")
-                  .append("svg:linearGradient")
-                  .attr("id", "gradient")
-                  .attr("x1", "0%")
-                  .attr("y1", "100%")
-                  .attr("x2", "100%")
-                  .attr("y2", "100%")
-                  .attr("spreadMethod", "pad");
-
-                legend.append("stop")
-                  .attr("offset", "0%")
-                  .attr("stop-color", "#f7fcf0")
-                  .attr("stop-opacity", 1);
-
-                legend.append("stop")
-                  .attr("offset", "33%")
-                  .attr("stop-color", "#bae4bc")
-                  .attr("stop-opacity", 1);
-
-                legend.append("stop")
-                  .attr("offset", "66%")
-                  .attr("stop-color", "#7bccc4")
-                  .attr("stop-opacity", 1);
-
-                legend.append("stop")
-                  .attr("offset", "100%")
-                  .attr("stop-color", "#084081")
-                  .attr("stop-opacity", 1);
-
-                key.append("rect")
-                  .attr("width", w)
-                  .attr("height", h - 30)
-                  .style("fill", "url(#gradient)")
-                  .attr("transform", "translate(0,10)");
-
-                var y = d3.scaleLinear()
-                  .range([300, 0])
-                  .domain([68, 12]);
-
-                var yAxis = d3.axisBottom()
-                  .scale(y)
-                  .ticks(5);
-
-                key.append("g")
-                  .attr("class", "y axis")
-                  .attr("transform", "translate(0,30)")
-                  .call(yAxis)
-                  .append("text")
-                  .attr("transform", "rotate(-90)")
-                  .attr("y", 0)
-                  .attr("dy", ".71em")
-                  .style("text-anchor", "end")
-                  .text("axis title");
-              </script>
-
-              <!-- End Gradient Bar -->
+              <img src="../static/images/chart-img.jpg" class="rounded"
+                style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px; padding-top:40px;"
+                alt="Jack Tweet 3">
 
             </h2><br><br><br>
             <!-- additional images -->
@@ -217,33 +159,131 @@
               style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 1">-->
 
             <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
-              Qualitative Data is numerical and it records quantities.
+              Qualitative Data is word-based so it describes qualities of things. An example would be
+              a heatmap with a color gradiant scale because each color represents a range of numerical values.
             </h2><br><br><br>
+
+            <!-- Start: Gradient Bar -->
+            <div id="legend1"></div>
+            <script type="text/javascript">
+              var w = 300, h = 50;
+
+              var key = d3.select("#legend1")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+
+              var legend = key.append("defs")
+                .append("svg:linearGradient")
+                .attr("id", "gradient")
+                .attr("x1", "0%")
+                .attr("y1", "100%")
+                .attr("x2", "100%")
+                .attr("y2", "100%")
+                .attr("spreadMethod", "pad");
+
+              legend.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#f7fcf0")
+                .attr("stop-opacity", 1);
+
+              legend.append("stop")
+                .attr("offset", "33%")
+                .attr("stop-color", "#bae4bc")
+                .attr("stop-opacity", 1);
+
+              legend.append("stop")
+                .attr("offset", "66%")
+                .attr("stop-color", "#7bccc4")
+                .attr("stop-opacity", 1);
+
+              legend.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#084081")
+                .attr("stop-opacity", 1);
+
+              key.append("rect")
+                .attr("width", w)
+                .attr("height", h - 30)
+                .style("fill", "url(#gradient)")
+                .attr("transform", "translate(0,10)");
+
+              var y = d3.scaleLinear()
+                .range([300, 0])
+                .domain([68, 12]);
+
+              var yAxis = d3.axisBottom()
+                .scale(y)
+                .ticks(5);
+
+              key.append("g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(0,30)")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("axis title");
+            </script>
+
+
+            <!-- End Gradient Bar -->
 
             <!-- <img src="../static/images/tweet2.jpg" class="rounded"
               style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 2">
             <img src="../static/images/tweet3.jpg" class="rounded"
               style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 3"> -->
-          </div> -->
+
+
+            <div class="container" style="padding-top: 40px;">
+
+              <div class="row" style="text-align: center;">
+                <div class="col-xs-12 col-md-12">
+                  <!-- Why? -->
+                  <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 40px" ;><b>Why Did We Do It?</b>
+                  </h1>
+                  <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
+                    We wanted to look into Twitter's data to see if we could possibly predict the outcome of the next
+                    presidential election.
+
+                  </h2><br><br><br>
+
+                  <!-- What's Our Story -->
+
+                  <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 40px" ;><b>Were We Successful?</b>
+                  </h1>
+
+
+                </div>
+
+                <div class="container" style="padding-top: 40px;">
+
+
+                  <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 80px" ;><b>Let's Get Started!</b>
+                  </h1>
+
+                </div>
 
 
 
 
-          <!-- Scrollama javascript -->
-          <script src="{{url_for('static', filename='js/stickyfill.min.js')}}"></script>
-          <script src="https://unpkg.com/scrollama"></script>
-          <script type="text/javascript" src="{{url_for('static', filename='js/scrollytelling.js')}}"></script>
+                <!-- Scrollama javascript -->
+                <script src="{{url_for('static', filename='js/stickyfill.min.js')}}"></script>
+                <script src="https://unpkg.com/scrollama"></script>
+                <script type="text/javascript" src="{{url_for('static', filename='js/scrollytelling.js')}}"></script>
 
-          <!-- text analysis functions -->
-          <script type="text/javascript" src="{{url_for('static', filename='js/textanalysis.js')}}"></script>
+                <!-- text analysis functions -->
+                <script type="text/javascript" src="{{url_for('static', filename='js/textanalysis.js')}}"></script>
 
-          <!-- Mapping and plotting functions -->
-          <script type="text/javascript" src="{{url_for('static', filename='js/visualization.js')}}"></script>
+                <!-- Mapping and plotting functions -->
+                <script type="text/javascript" src="{{url_for('static', filename='js/visualization.js')}}"></script>
 
-          <!-- Monitors user inputs, populates webpage -->
-          <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
+                <!-- Monitors user inputs, populates webpage -->
+                <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
 
-          <script type="text/javascript" src="../static/js/visualization.js"></script>
+                <script type="text/javascript" src="../static/js/visualization.js"></script>
 
 
 </body>
