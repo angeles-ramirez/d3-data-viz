@@ -18,7 +18,7 @@ function initializePlot(){
     {
         autosize: true,
         //width: 500,
-        title: "Popularity on Twitter vs. Time",
+        title: "Popularity on Twitter Over Time",
         xaxis: { title: "Date"},
         yaxis: { title: "Retweets + Favorites" },
         //height: 650,
@@ -83,6 +83,11 @@ function handleSubmit() {
     initializePlot(); // clear line plot
 
     var mostPopularP = "" // initializa most popular tweet text
+    
+    // initialize text analysis slides
+    d3.select('#figure3').html("");
+    d3.select('#figure4').html("");
+
 
     // Table which translates form selection into twitter username
     var politicianDict = {
@@ -133,9 +138,12 @@ function handleSubmit() {
         textAnalysis = analyzeTweets(data); // perform text analysis of the tweets
         tweetReachVsTime(data); // perform text analysis of the tweets
         console.log(textAnalysis)
-        // Set up messages
+        // Set up most popular tweet slide
         d3.select('#figure3').insert("p").html(`<br>${selectv[0]}'s Most Popular Tweet: <br><br><strong>${textAnalysis.mostPopular}</strong><br><br>
         was retweeted ${textAnalysis.retweetCount} times<br>`).style("color", "#1f77b4") // Plotly "muted blue"
+        // Set up most vocabulary slide
+        d3.select('#figure4').insert("p").html(`<br>${selectv[0]} uses these words: <br><br><strong>${textAnalysis.vocab}</strong><br><br> 
+        unusually often in tweets.`).style("color", "#1f77b4") // Plotly "muted blue"
     });
 
     // Make API calls and analyze responses
@@ -144,7 +152,10 @@ function handleSubmit() {
         tweetReachVsTime(data);
         completeFunction(); // hide spinner once API calls have returned
         d3.select('#figure3').insert("p").html(`<br>${selectv[1]}'s Most Popular Tweet: <br><br><strong>${textAnalysis.mostPopular}</strong><br><br>
-        was retweeted ${textAnalysis.retweetCount} times<br>`).style("color", "#ff7f0e") // Plotly "safety orange"
+        was retweeted ${textAnalysis.retweetCount} times<br>`).style("color", "#ff7f0e"); // Plotly "safety orange"
+        // Set up most vocabulary slide
+        d3.select('#figure4').insert("p").html(`<br>${selectv[1]} uses these words: <br><br><strong>${textAnalysis.vocab}</strong><br><br> 
+        unusually often in tweets.`).style("color", "#ff7f0e"); // Plotly "safety orange"
     });
 
 };

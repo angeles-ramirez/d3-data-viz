@@ -43,6 +43,21 @@
   flex: 1;
 }
 
+#scrolly4 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  padding: 1rem;
+}
+
+#scrolly4>* {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
 
 article {
   position: relative;

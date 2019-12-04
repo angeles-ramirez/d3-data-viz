@@ -20,10 +20,20 @@ var figure3 = scrolly3.select('figure');
 var article3 = scrolly3.select('article');
 var step3 = article3.selectAll('.step');
 
+var scrolly4 = main.select('#scrolly4');
+var figure4 = scrolly4.select('figure');
+var article4 = scrolly4.select('article');
+var step4 = article4.selectAll('.step');
+console.log(scrolly4)
+console.log(figure4)
+console.log(article4)
+console.log(step4)
+
 // initialize the scrollama
 var scroller1 = scrollama();
 var scroller2 = scrollama();
 var scroller3 = scrollama();
+var scroller4 = scrollama();
 
 // generic window resize listener event
 function handleResize() {
@@ -32,6 +42,7 @@ function handleResize() {
   step1.style('height', stepH + 'px');
   step2.style('height', stepH + 'px');
   step3.style('height', stepH + 'px');
+  step4.style('height', stepH + 'px');
 
   var figureHeight = window.innerHeight / 2
   var figureMarginTop = (window.innerHeight - figureHeight) / 2
@@ -45,6 +56,10 @@ function handleResize() {
     .style('top', figureMarginTop + 'px');
   
   figure3
+    .style('height', figureHeight + 'px')
+    .style('top', figureMarginTop + 'px');
+
+  figure4
     .style('height', figureHeight + 'px')
     .style('top', figureMarginTop + 'px');
 
@@ -62,8 +77,8 @@ function handleStepEnter1(response) {
     return i === response.index;
   })
 
-  // update graphic based on step
-  figure1.select('p').text(response.index + 1);
+  // // update graphic based on step
+  // figure1.select('p').text(response.index + 1);
 
 }
 
@@ -76,8 +91,8 @@ function handleStepEnter2(response) {
     return i === response.index;
   })
 
-  // update graphic based on step
-  figure2.select('p').text(response.index + 1);
+  // // update graphic based on step
+  // figure2.select('p').text(response.index + 1);
 
 }
 
@@ -87,6 +102,20 @@ function handleStepEnter3(response) {
 
   // add color to current step only
   step3.classed('is-active', function (d, i) {
+    return i === response.index;
+  })
+
+  // update graphic based on step
+  //figure3.select('p').text(response.index + 1);
+
+}
+
+function handleStepEnter4(response) {
+  console.log(response)
+  // response = { element, direction, index }
+
+  // add color to current step only
+  step4.classed('is-active', function (d, i) {
     return i === response.index;
   })
 
@@ -139,6 +168,15 @@ function init() {
     debug: false,
   })
     .onStepEnter(handleStepEnter3)
+
+  scroller4.setup({
+    step: '#scrolly4 article .step',
+    offset: 0.33,
+
+    // set to true to see debug horizontal line
+    debug: false,
+  })
+    .onStepEnter(handleStepEnter4)
 
 
   // setup resize event

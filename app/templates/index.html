@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Politician Comparisons</title>
+  <title>Twitter Poll</title>
   <!-- Core Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   
@@ -51,8 +51,8 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-12">
-          <h1>Politician Twitter Comparison</h1>
-          <p>Please select two politicians from the dropdown to compare against each other.</p>
+          <h1>Who Has The Most Political Capital on Twitter?</h1>
+          <p><br>Please select two politicians from the dropdown to see a comparison.</p>
         </div>
       </div>
       
@@ -100,7 +100,7 @@
 
    <main>
     <section id="intro">
-        <p> <br> This is the start of section 1. In this chart we show the twitter popularity of two politicians as layers on a leaflet map with blue and orange markers.<br></p>
+        <p><br><strong>Keep Scrolling For More Information.</strong><br></p>
 		</section>
 
     <section id="scrolly1">
@@ -110,14 +110,14 @@
             <!-- <p class="stepText">STEP 1</p> -->
 				</div>
 				<div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-					<p class="stepText">For this dataset we used the twitter API to pull tweets related to each politician based on a specific hashtag.</p>
+					<p class="stepText">This dataset was collected using the Twitter API. <br><br>When users include a politician's campaign hashtag, for example,<br><br><strong>#KeepAmericaGreat</strong> or <strong>#FeeltheBern</strong><br><br> in their tweets, that user's location is added to this map.</p>
 				</div>
 				<div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
-					<p class="stepText">Then we used the location of each user who tweeted about the politician and mapped the location on this chart.</p>
+					<p class="stepText">More markers in a particular area indiciate more support in that area.</p>
 				</div>
-				<div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
+				<!-- <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
 					<p class="stepText">We only included tweets that originated in the United States.</p>
-				</div>
+				</div> -->
 			</article>
 
 			<figure style="height: 523.5px; top: 261.75px;">
@@ -128,13 +128,13 @@
     </section>
 
     <section id="outro1">
-      <p> <br> This is the end of section 1 <br></p>
+      <p></p>
     </section>
     <br>
     <br>
 
     <section id="intro2">
-        <p> <br> This is the start of section 2. Here we show a multi-trace line plot tracking user interactivity with each politician.. <br></p>
+        <p><br></p>
       </section>
 
     <section id="scrolly2">
@@ -144,13 +144,13 @@
           <!-- <p class="stepText">STEP 1</p> -->
         </div>
         <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-          <p class="stepText">To track interactivity we took the aggregate of the favorites+retweets for each day and mapped it on this chart.</p>
+          <p class="stepText">To quantify how popular a politician is on Twitter, we totalled his/her <strong>Favorites & Retweets</strong> for each day.</p>
         </div>
-        <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
+        <!-- <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
           <p class="stepText">Hence this shows how much activity each politician is getting each day by calculating the sum of favorites + retweets.</p>
-        </div>
+        </div> -->
         <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
-          <p class="stepText">For this dataset, we are taking the politicians 3200 most recent tweets. However the dataset will grow over time as more data is processed into the database.</p>
+          <p class="stepText">At the start of this project, we analyzed the 3200 most recent tweets for each politician.<br><br> More tweets are added to the dataset each day.</p>
         </div>
       </article>
   
@@ -161,13 +161,13 @@
     </section>
   
     <section id="outro2">
-      <p> <br> This is the end of section 2 <br></p>
+      <p><br></p>
     </section>
     <br>
     <br>
     <section id="intro3">
-        <p> <br>This is the beginning of section 3. Here we show the 5 most common words in the politician's tweets, as well as their most popular tweet ever.<br></p>
-      </section>
+        <p></p>
+    </section>
   
     <section id="scrolly3">
 
@@ -176,14 +176,14 @@
           <!-- <p class="stepText">STEP 1</p> -->
         </div>
         <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-          <p class="stepText">The most popular tweet is the sum of favorites and retweets for a single tweet.</p>
+          <p class="stepText">The most popular tweet has the highest total of Favorites and Retweets.</p>
         </div>
-        <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
+        <!-- <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
           <p class="stepText">To get the 5 most common words we extracted all of the politician's tweets and counted the frequency at which each word appeared.</p>
         </div>
         <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
           <p class="stepText">We removed the 500 most common words in the English language to create a population of unique words.</p>
-        </div>  
+        </div>   -->
       </article>
 
       <figure id="figure3" style="height: 523.5px; top: 261.75px;">
@@ -192,7 +192,39 @@
     </section>
       
     <section id="outro3">
-      <p> <br> This is the end of section 3 <br></p>
+      <p></p>
+    </section>
+
+    <section id="intro4">
+      <p></p>
+    </section>
+
+    <section id="scrolly4">
+
+      <article>
+        <div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
+          <!-- <p class="stepText">STEP 1</p> -->
+        </div>
+        <!-- <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
+          <p class="stepText">The most popular tweet is the sum of favorites and retweets for a single tweet.</p>
+        </div> -->
+        <div class="step" data-step="2" data-scrollama-index="2" style="height: 785px;">
+          <p class="stepText">To analyze a politician's unique twitter vocabulary, we extracted each word from all of their tweets and calculated the frequency at which each word appeared.
+            <br><br>We removed the 500 most common words in the English language to create a population of unique words.
+          </p>
+        </div>
+        <!-- <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
+          <p class="stepText">We disregarded the 500 most common words in the English language to create a population of unique words.</p>
+        </div>   -->
+      </article>
+
+      <figure id="figure4" style="height: 523.5px; top: 261.75px;">
+        <!-- <p>1</p> -->
+      </figure>
+    </section>
+      
+    <section id="outro4">
+      <p><br>We hope you found this analysis interesting! Compare more politicians at the top of the page.<br></p>
       <p><br><br></p>
       <p><br><br></p>
       <p><br><br></p>
