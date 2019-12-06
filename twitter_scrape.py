@@ -8,6 +8,9 @@ import pandas as pd
 import numpy as np
 import requests
 import pymongo
+import geonamescache
+import fuzzymatcher
+from fuzzymatcher import link_table, fuzzy_left_join
 from pymongo import MongoClient
 from operator import itemgetter
 import functools
@@ -153,6 +156,10 @@ def hashtag_scrape():
 
             Var_0 = twitter_data['lat'] != 0
             twitter_data = twitter_data[conjunction(Var_0)]
+            Var_USA = twitter_data['User_Location'] != 'USA'
+            twitter_data = twitter_data[conjunction(Var_USA)]
+            Var_US = twitter_data['User_Location'] != 'United States'
+            twitter_data = twitter_data[conjunction(Var_US)]
             twitter_data = twitter_data[['Screen_Name','User_Name','Tweet_Text','Hashtags','Tweet_Created_At','Favorite_Count','Retweet_Count','Tweet_URL','User_Location','lat','long']]
             twitter_data['keyword'] = searchterm
 

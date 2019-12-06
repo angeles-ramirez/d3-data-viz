@@ -8,6 +8,9 @@ import pandas as pd
 import numpy as np
 import requests
 import pymongo
+import geonamescache
+import fuzzymatcher
+from fuzzymatcher import link_table, fuzzy_left_join
 from pymongo import MongoClient
 from operator import itemgetter
 import functools
