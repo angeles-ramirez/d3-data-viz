@@ -61,7 +61,11 @@ def twitter_user(user_name: str):
     # .limit(100) # do not return document Id, as this is not serializable
     sample_tweets = collection.find({"Screen_Name": user_name}, {'_id': False})
 
-    return jsonify([sample_tweet for sample_tweet in sample_tweets])
+    response = jsonify([sample_tweet for sample_tweet in sample_tweets])
+
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
 
 
 @app.route("/api/hashtag/<user_name>")
@@ -90,7 +94,11 @@ def sevenday(user_name: str):
     # .limit(100) # do not return document Id, as this is not serializable
     sample_tweets = collection.find({"keyword": filter1}, {'_id': False})
 
-    return jsonify([sample_tweet for sample_tweet in sample_tweets])
+    response = jsonify([sample_tweet for sample_tweet in sample_tweets])
+
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
 
 
 if __name__ == '__main__':

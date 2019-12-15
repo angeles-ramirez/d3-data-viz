@@ -110,12 +110,12 @@ function handleSubmit() {
     var userName2 = politicianDict[selectv[1]];
 
     // Build API endpoint urls for recent tweets related to selected politicians
-    var hashtagUrl1 = window.location.href + 'api/hashtag/' + userName1;
-    var hashtagUrl2 = window.location.href + 'api/hashtag/'+ userName2;
+    var hashtagUrl1 = "https://twitter-history-api.herokuapp.com/api/hashtag/" + userName1;
+    var hashtagUrl2 = "https://twitter-history-api.herokuapp.com/api/hashtag/" + userName2;
 
     // Build API endpoint urls for tweets made by the selected politicians
-    var userUrl1 = window.location.href + 'api/historical/' + userName1;
-    var userUrl2 = window.location.href + 'api/historical/' + userName2;
+    var userUrl1 = "https://twitter-history-api.herokuapp.com/api/historical/" + userName1;
+    var userUrl2 = "https://twitter-history-api.herokuapp.com/api/historical/" + userName2;
 
     //---------------------------------------
     // Make API calls and analyze responses
