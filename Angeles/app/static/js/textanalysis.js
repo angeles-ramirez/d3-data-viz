@@ -1,3 +1,8 @@
+//-------------------------------------------------------
+// Text Analysis: functions for analyzing the text of tweets
+//-------------------------------------------------------
+
+
 // https://gist.github.com/deekayen/4148741
 
 const mostCommonWords =["im", "its", "rt", "&amp", "", "&amp;", "-", "amp", "realdonaldtrump", "berniesanders", "joebiden", 
@@ -40,68 +45,66 @@ const mostCommonWords =["im", "its", "rt", "&amp", "", "&amp;", "-", "amp", "rea
 "bring", "yes", "distant", "fill", "east", "paint", "language", "among"];
 
 
-function analyzeTweets(url){
-  d3.json(url).then(function(data) // query the url for second selection
-  {
-    console.log(url)
-    // initialize
-    var maxReach = 0;
-    var allWords = [];
-    var counter = {};
+function analyzeTweets(tweets){
+// Args - tweets: json
+// return - object vocab: array, mostPopularTweet: str
+// This functions takes many tweets for one user and returns an object wiht a list of the most common words used in the tweets and the tweet with the most "reach"
 
-    data.forEach( function(element){
-        favoriteCount = element["Favorite_Count"];
-        retweetCount = element["Retweet_Count"];
-        tweetText = element["Tweet_Text"];
-        tweetWords = tweetText.split(" "); // Split tweet into individual words
-        tweetWords.forEach(word => allWords.push(word.toLowerCase().replace(/[^a-zA-Z]/g, ""))); // add this tweet's words to word list, change everything to lowercase and remove special characters
-        reach = favoriteCount + retweetCount; // reach is favorites plus retweets
-        if (reach > maxReach) { // if the is tweet with the highest reach, collect it
-            mostPopularTweet = tweetText;
-            maxReach = reach;
-            maxFavorites = favoriteCount;
-            maxRetweets = retweetCount;
-        }
-      });
+  // initialize
+  var maxReach = 0;
+  var allWords = [];
+  var counter = {};
 
-    console.log(mostPopularTweet)
-    console.log(maxFavorites)
-    console.log(maxRetweets)
-
-    allWords.forEach(function(word){
-      if (typeof(counter[word]) !== 'undefined'){
-        counter[word] += 1;
-      } else {
-        counter[word] = 1;
+  // Find most popular tweet, collect words used
+  tweets.forEach( function(element){
+      favoriteCount = element["Favorite_Count"];
+      retweetCount = element["Retweet_Count"];
+      tweetText = element["Tweet_Text"];
+      
+      tweetWords = tweetText.split(" "); // Split tweet into individual words
+      tweetWords.forEach(word => allWords.push(word.toLowerCase().replace(/[^a-zA-Z]/g, ""))); // add this tweet's words to word list, change everything to lowercase and remove special characters
+      reach = favoriteCount + retweetCount; // reach is favorites plus retweets
+      if (reach > maxReach) { // if the is tweet with the highest reach, collect it
+          mostPopularTweet = tweetText;
+          maxReach = reach;
+          maxFavorites = favoriteCount;
+          maxRetweets = retweetCount;
+          tweetDate = element["Tweet_Created_At"]; // overwrite tweet date
       }
-    })
-
-    // Put the allWords object into list and sort
-    var sortable = [];
-    for (var word in counter) {
-        sortable.push([word, counter[word]]);
-    }
-    sortable.sort(function(a, b) {
-        return b[1] - a[1];
-    });
-
-    vocab = []
-    i = 0
-    j = 0
-    while (i < 10) {
-      if (mostCommonWords.includes(sortable[j][0]) === false) { // if the next most common word is not in the most common words add it to vocab, otherwise continure
-        vocab.push(sortable[j][0])
-        i++;
-      }
-      j++;
-    }
-    console.log(vocab)
-
-    // Set up messages
-    d3.select('#figure3')
-    .text(vocab)
   });
 
+  // Create a counter object with {word: number_of_uses}
+  allWords.forEach(function(word){
+    if (typeof(counter[word]) !== 'undefined'){
+      counter[word] += 1;
+    } else {
+      counter[word] = 1;
+    }
+  })
+
+  // Put the counter object into list and sort so that most used words are at the begining
+  var sortable = [];
+  for (var word in counter) {
+      sortable.push([word, counter[word]]);
+  }
+  sortable.sort(function(a, b) {
+      return b[1] - a[1];
+  });
+
+  // create an array of then 10 most used words which are not in the hardcoded array of common words
+  vocab = []
+  i = 0
+  j = 0
+  while (i < 10) {
+    if (mostCommonWords.includes(sortable[j][0]) === false) { // if the next most common word is not in the most common words add it to vocab, otherwise continue
+      vocab.push(sortable[j][0])
+      i++;
+    }
+    j++;
+  }
+
+  var response = {"mostPopular": mostPopularTweet, "favoriteCount": maxFavorites, "retweetCount": maxRetweets, "tweetDate": tweetDate, "vocab": vocab};
+  return response;
 
 }
 

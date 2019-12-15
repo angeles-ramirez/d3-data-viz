@@ -3,217 +3,287 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Placeholder Title</title>
+
+  <link rel="stylesheet" type="text/css" href="../static/css/visualization.css">
+  <title>About</title>
   <!-- Core Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin=""/>
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-  crossorigin=""></script>
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
   <!-- API key -->
   <script type="text/javascript" src="{{url_for('static', filename='js/config.js')}}"></script>
   <!-- Leaflet heatmap plugin-->
   <script type="text/javascript" src="{{url_for('static', filename='js/leaflet-heat.js')}}"></script>
 
-  
+
   <!-- Plotly -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  
+
 
   <!-- D3 -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- Gradient Bar -->
+  <style type="text/css">
+    .axis text {
+      font: 10px sans-serif;
+    }
 
+    .axis line,
+    .axis path {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    svg {
+      padding-left: 50px;
+    }
+  </style>
   <!-- Multiselect Bootstrap Addon -->
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-  
+
   <!-- App specific sytlesheet -->
   <link rel="stylesheet" href="{{url_for('static', filename='css/scrollytelling.css')}}">
 
 </head>
 
-<body>
-  <div class="container">
+<body style="background-color: whitesmoke;">
 
-    <div class="row">
-        <div class="col-xs-12 col-md-12">
-          <h1>#History</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-      </div>
-      
-    <div class="row">
-      <div class="col-xs-12  col-md-4">
-        <div class="article">
-          <form>
-            
-            <div class="form-group">
-              
-              <!-- <select class="selectpicker" id="keyInputs" multiple data-max-options="2">
-                <option>ROBBERY</option>
-                <option>ASSAULT</option>
-                <option>WARRANTS</option>
-                <option>STOLEN PROPERTY</option>
-                <option>DRUG/NARCOTIC</option>
-                <option>KIDNAPPING</option>
-                <option>BURGLARY</option>
-                <option>NON-CRIMINAL</option>
-                <option>OTHER OFFENSES</option>
-                <option>SUSPICIOUS OCC</option>
-              </select> -->
-              <select class="selectpicker" id="keyInputs" multiple data-max-options="2">
-                <option>Bernie Sanders</option>
-                <option>Donald Trump</option>
-                <option>Joe Biden</option>
-                <option>Elizabeth Warren</option>
-                <option>Pete Buttigieg</option>
-                <option>Kamala Harris</option>
-                <option>Andrew Yang</option>
-                <option>Ted Cruz</option>
-                <option>Ben Carson</option>
-                <option>Mike Pence</option>
-              </select>
-            </div>
-            <button id="button" type="button" class="btn btn-default">Search</button>
-            <!--button id="refreashbutton" type="button" class="btn btn-default">Refreash</button-->
-          </form>
-        </div>
-      </div>
+  <!-- Temporary Nav - Delete after testing  -->
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">Home</a>
+
+    <a class="navbar-brand" href="about.html">About</a>
+  </nav>
+
+  <!-- Nav test ends -->
+
+  <!-- main img-->
+  <!-- <img src="../static/images/bg-masthead.png" class="rounded mx-auto d-block" alt="candidates image"> -->
 
 
-   <main>
-    <section id="intro">
-        <p> <br> This is the start of section 1. Here we show a heatmap comparing twitter popularity of two politicians as layers on a leaflet map<br></p>
-		</section>
 
-    <section id="scrolly1">
 
-			<article>
-				<div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
-            <!-- <p class="stepText">STEP 1</p> -->
-				</div>
-				<div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-					<p class="stepText">STEP 2</p>
-				</div>
-				<div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
-					<p class="stepText">STEP 3</p>
-				</div>
-				<div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
-					<p class="stepText">STEP 4</p>
-				</div>
-			</article>
 
-			<figure style="height: 523.5px; top: 261.75px;">
-        <p>1</p>
-        <div id="map"></div>
-      </figure>
-      
-    </section>
 
-    <section id="outro1">
-      <p> <br> This is the end of section 1 <br></p>
-    </section>
-
-    <section id="intro2">
-        <p> <br> This is the start of section 2. Here we show a multi-trace line plot tracking how active the two politcians have been on twitter. <br></p>
-      </section>
-
-    <section id="scrolly2">
-
-      <article>
-        <div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
-          <!-- <p class="stepText">STEP 1</p> -->
-        </div>
-        <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-          <p class="stepText">STEP 2</p>
-        </div>
-        <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
-          <p class="stepText">STEP 3</p>
-        </div>
-        <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
-          <p class="stepText">STEP 4</p>
-        </div>
-      </article>
-  
-      <figure style="height: 523.5px; top: 261.75px;">
-        <p>1</p>
-        <div id="lineplot"></div>
-      </figure>
-    </section>
-  
-    <section id="outro2">
-      <p> <br> This is the end of section 2 <br></p>
-    </section>
-
-    <section id="intro3">
-        <p> <br> This is the start of section 3. Here we show the most common 5 words in the politician's tweets, as well as their most popular tweets ever.<br></p>
-      </section>
-  
-    <section id="scrolly3">
-
-      <article>
-        <div class="step is-active" data-step="1" data-scrollama-index="0" style="height: 785px;">
-          <!-- <p class="stepText">STEP 1</p> -->
-        </div>
-        <div class="step" data-step="2" data-scrollama-index="1" style="height: 785px;">
-          <p class="stepText">STEP 2</p>
-        </div>
-        <div class="step" data-step="3" data-scrollama-index="2" style="height: 785px;">
-          <p class="stepText">STEP 3</p>
-        </div>
-        <div class="step" data-step="4" data-scrollama-index="3" style="height: 785px;">
-          <p class="stepText">STEP 4</p>
-        </div>
-        <div class="step" data-step="5" data-scrollama-index="4" style="height: 785px;">
-            <p class="stepText">STEP 5</p>
-        </div>   
-      </article>
-
-      <figure id="figure3" style="height: 523.5px; top: 261.75px;">
-        <p>1</p>
-      </figure>
-    </section>
-      
-    <section id="outro3">
-      <p> <br> This is the end of section 3 <br></p>
-      <p><br><br></p>
-      <p><br><br></p>
-      <p><br><br></p>
-      <p><br><br></p>
-      <p><br><br></p>
-      <p><br><br></p>
-    </section>
-
-    </main> 
-
+  <div class="container" style="background-color: whitesmoke;">
+    <h1><img src="../static/images/bg-masthead-whitesmoke.png" class="rounded"
+        style="padding-top: 10px; max-height: 500px; width: 1200px;" alt="2020 candidates img"></h1>
   </div>
+  <div class="container" style="padding-top: 40px;">
 
-  <!-- Scrollama javascript -->
-  <script src="{{url_for('static', filename='js/stickyfill.min.js')}}"></script>
-  <script src="https://unpkg.com/scrollama"></script>
-  <script type="text/javascript" src="{{url_for('static', filename='js/scrollytelling.js')}}"></script>
+    <div class="row" style="text-align: center;">
+      <div class="col-xs-12 col-md-12">
+        <h1 style="padding-top: 20px; font-size: xx-large;"><b>Political Reach on Twitter Without the Political
+            Advertising</b>
+        </h1>
+        <!-- Brief Summary -->
+        <h4 style="font-size: x-large;padding-top: 60px;padding-bottom:60px;text-align: center; font-style: italic;" ;>
+          We looked at the quantitative and qualitative data of some of this year’s most popular politician’s
+          and Presidential candidates to find out how they all compare.
+        </h4>
+        <!-- Brief Summary End-->
+        <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">On October 30th, 2019,
+          Twitter’s CEO, Jack Dorsey announced that Twitter will stop accepting political ads to reduce significant risk
+          to politics.
+        </h2><br><br><br>
 
-  <!-- text analysis functions -->
-  <script type="text/javascript" src="{{url_for('static', filename='js/textanalysis.js')}}"></script>
+        <img src="../static/images/tweet1.jpg" class="rounded"
+          style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 1">
+        <img src="../static/images/tweet2.jpg" class="rounded"
+          style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 2">
+        <img src="../static/images/tweet3.jpg" class="rounded"
+          style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 3">
+      </div>
 
-  <!-- Mapping javascript -->
-  <script type="text/javascript" src="{{url_for('static', filename='js/visualization.js')}}"></script>
+      <div class="row" style="text-align: center; block-size: 40px; padding-top: 45px;padding-bottom: 50px;">
+      </div>
+      <div class="col-xs-12 col-md-12">
+
+        <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 50px;">The
+          announcement comes amid the scrutiny of social media companies’ handling of political ads. Large social media
+          companies, such as Facebook, have been criticized for allowing politicians to run false advertisements.
+        </h2><br><br><br>
+      </div>
 
 
+      <div class="row" style="text-align: center; block-size: 40px; padding-top: 45px;padding-bottom: 60px;">
+      </div>
+      <div class="col-xs-12 col-md-12">
+
+        <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">This decision puts Twitter
+          at odds with other social media companies that have defended their policies of not fact-checking political
+          ads.
+        </h2><br><br><br>
+      </div>
+
+
+
+      <!-- More Info  -->
+      <div class="container" style="padding-top: 40px;">
+
+        <div class="row" style="text-align: center;">
+          <div class="col-xs-12 col-md-12">
+            <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 40px" ;><b>Quantitative and Qualitative
+                Data</b>
+            </h1>
+            <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
+              Quantitative Data are measures of values or counts and are expressed as numbers. So, it answers
+              "how much?" and "how many?"
+
+              <img src="../static/images/chart-img.jpg" class="rounded"
+                style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px; padding-top:40px;"
+                alt="Jack Tweet 3">
+
+            </h2><br><br><br>
+            <!-- additional images -->
+            <!-- <img src=" ../static/images/tweet1.jpg" class="rounded"
+              style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 1">-->
+
+            <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
+              Qualitative Data is word-based so it describes qualities of things. An example would be
+              a heatmap with a color gradiant scale because each color represents a range of numerical values.
+            </h2><br><br><br>
+
+            <!-- Start: Gradient Bar -->
+            <div id="legend1"></div>
+            <script type="text/javascript">
+              var w = 300, h = 50;
+
+              var key = d3.select("#legend1")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+
+              var legend = key.append("defs")
+                .append("svg:linearGradient")
+                .attr("id", "gradient")
+                .attr("x1", "0%")
+                .attr("y1", "100%")
+                .attr("x2", "100%")
+                .attr("y2", "100%")
+                .attr("spreadMethod", "pad");
+
+              legend.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "#f7fcf0")
+                .attr("stop-opacity", 1);
+
+              legend.append("stop")
+                .attr("offset", "33%")
+                .attr("stop-color", "#bae4bc")
+                .attr("stop-opacity", 1);
+
+              legend.append("stop")
+                .attr("offset", "66%")
+                .attr("stop-color", "#7bccc4")
+                .attr("stop-opacity", 1);
+
+              legend.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "#084081")
+                .attr("stop-opacity", 1);
+
+              key.append("rect")
+                .attr("width", w)
+                .attr("height", h - 30)
+                .style("fill", "url(#gradient)")
+                .attr("transform", "translate(0,10)");
+
+              var y = d3.scaleLinear()
+                .range([300, 0])
+                .domain([68, 12]);
+
+              var yAxis = d3.axisBottom()
+                .scale(y)
+                .ticks(5);
+
+              key.append("g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(0,30)")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("axis title");
+            </script>
+
+
+            <!-- End Gradient Bar -->
+
+            <!-- <img src="../static/images/tweet2.jpg" class="rounded"
+              style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 2">
+            <img src="../static/images/tweet3.jpg" class="rounded"
+              style="padding-top: 10px; max-height: 500px; width: 800px; padding-bottom: 40px;" alt="Jack Tweet 3"> -->
+
+
+            <div class="container" style="padding-top: 40px;">
+
+              <div class="row" style="text-align: center;">
+                <div class="col-xs-12 col-md-12">
+                  <!-- Why? -->
+                  <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 40px" ;><b>Why Did We Do It?</b>
+                  </h1>
+                  <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;padding-top: 40px">
+                    We wanted to look into Twitter's data to see if we could possibly predict the outcome of the next
+                    presidential election.
+
+                  </h2><br><br><br>
+
+                  <!-- What's Our Story -->
+
+                  <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 40px" ;><b>Were We Successful?</b>
+                  </h1>
+
+
+                </div>
+
+                <div class="container" style="padding-top: 40px;">
+
+
+                  <h1 style="padding-top: 20px; font-size: xx-large;padding-top: 80px" ;><b>Let's Get Started!</b>
+                  </h1>
+
+                </div>
+
+
+
+
+                <!-- Scrollama javascript -->
+                <script src="{{url_for('static', filename='js/stickyfill.min.js')}}"></script>
+                <script src="https://unpkg.com/scrollama"></script>
+                <script type="text/javascript" src="{{url_for('static', filename='js/scrollytelling.js')}}"></script>
+
+                <!-- text analysis functions -->
+                <script type="text/javascript" src="{{url_for('static', filename='js/textanalysis.js')}}"></script>
+
+                <!-- Mapping and plotting functions -->
+                <script type="text/javascript" src="{{url_for('static', filename='js/visualization.js')}}"></script>
+
+                <!-- Monitors user inputs, populates webpage -->
+                <script type="text/javascript" src="{{url_for('static', filename='js/app.js')}}"></script>
+
+                <script type="text/javascript" src="../static/js/visualization.js"></script>
 
 
 </body>

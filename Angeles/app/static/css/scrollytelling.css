@@ -58,7 +58,7 @@ figure {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  background-color: #8a8a8a;
+  background-color: #fcf4ee;
   z-index: 0;
 }
 
@@ -71,9 +71,9 @@ figure p {
   -moz-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  font-size: 8rem;
-  font-weight: 900;
-  color: #fff;
+  font-size: 2rem;
+  font-weight: 100;
+  color: black;
 }
 
 
